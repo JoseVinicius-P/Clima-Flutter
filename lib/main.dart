@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'values/MyColors.dart';
+import 'values/MyStrings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Clima',
+      title: MyStrings.clima,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.textColor),
         useMaterial3: true,
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(fontSize: 36.0, color: MyColors.textColor),
         )
       ),
-      home: const SearchCity(title: 'Pesquisar Cidade'),
+      home: const SearchCity(title: MyStrings.pesquisarCidade),
     );
   }
 }
@@ -59,7 +60,7 @@ class _SearchCityState extends State<SearchCity> {
                 padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                 child:
                 Text(
-                  'Vamos pesquisar uma cidade...',
+                  MyStrings.vamosPesquisarSuaCidade,
                   style: theme.textTheme.titleLarge,
                 )
               ),
@@ -109,7 +110,7 @@ class SearchTextField extends StatelessWidget {
           Icons.search,
           color: MyColors.textColor,
         ),
-        hintText: "Pesquisar...",
+        hintText: MyStrings.pesquisar,
         hintStyle: const TextStyle(color: MyColors.textColor),
         filled: true,
         fillColor: MyColors.whiteTranparent30,
