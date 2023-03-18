@@ -28,8 +28,7 @@ class _Home extends State<Home>{
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
               image: DecorationImage(
@@ -37,46 +36,144 @@ class _Home extends State<Home>{
                 fit: BoxFit.cover,
               )
           ),
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(30.0),
-              child:  Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Iaciara, Goiás',
-                          style: theme.textTheme.titleLarge,
-                          textAlign: TextAlign.left,
-                        ),
+          child: SingleChildScrollView(
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/background.jpg'),
+                    fit: BoxFit.cover,
+                  )
+              ),
+              child: Column(
+                children: [
+                  SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),
+                      child:  Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Iaciara, Goiás',
+                                style: theme.textTheme.titleLarge,
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Seg, 30 jun',
+                                style: theme.textTheme.labelSmall,
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15.0),
+                          CurrentWeatherLayout(theme: theme),
+                          const SizedBox(height: 70),
+                          ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
+                          const SizedBox(height: 10),
+                          ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
+                          const SizedBox(height: 10),
+                          ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
+                          SizedBox(height: 40),
+                          Row(
+                            children: [
+                              TextButton(
+                                onPressed: (){},
+                                child: Text(
+                                  'Hoje',
+                                  style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(width: 15),
+                              TextButton(
+                                onPressed: (){},
+                                child: Text(
+                                  'Amanhã',
+                                  style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    child: ListView(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        SizedBox(width: 25.0),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        TimeCondition(),
+                        SizedBox(width: 25.0),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'Seg, 30 jun',
-                          style: theme.textTheme.labelSmall,
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15.0),
-                    CurrentWeatherLayout(theme: theme),
-                    const SizedBox(height: 70),
-                    ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
-                    const SizedBox(height: 10),
-                    ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
-                    const SizedBox(height: 10),
-                    ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 25),
+                ],
+              ),
             ),
           ),
-        ),
       ),
+
     );
   }
 
+}
+
+class TimeCondition extends StatelessWidget {
+  const TimeCondition({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 5.0),
+        Container(
+          decoration: BoxDecoration(
+          color: MyColors.whiteTranparent30,
+            borderRadius: BorderRadius.all(
+              Radius.circular(40.0),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text('Agora'),
+                Image(
+                  image: AssetImage('assets/images/cludy.png'),
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+                Text('25º')
+              ],
+            ),
+          ),
+
+        ),
+        SizedBox(width: 5.0),
+      ],
+    );
+  }
 }
 
 class CurrentWeatherLayout extends StatelessWidget {
