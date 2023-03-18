@@ -1,4 +1,5 @@
 
+import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget{
@@ -58,16 +59,41 @@ class _Home extends State<Home>{
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Image(
-                      image: AssetImage('assets/images/cludy.png'),
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
+                SizedBox(height: 15.0),
+                CurrentWeatherLayout(theme: theme),
+                SizedBox(height: 70),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: MyColors.whiteTranparent70,
+                    borderRadius:BorderRadius.all(
+                      Radius.circular(20.0),
                     ),
-                  ],
-                ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(17.0)
+                            )
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(1.0),
+                            child: Image(
+                              image: AssetImage('assets/images/cludy.png'),
+                              width: 50,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -76,4 +102,55 @@ class _Home extends State<Home>{
     );
   }
 
+}
+
+class CurrentWeatherLayout extends StatelessWidget {
+  const CurrentWeatherLayout({
+    super.key,
+    required this.theme,
+  });
+
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage('assets/images/cludy.png'),
+          width: 150,
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.high,
+        ),
+        SizedBox(width: 15.0),
+        Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '19',
+                  style: theme.textTheme.displayLarge,
+                ),
+                Text(
+                  'ºC',
+                  style: theme.textTheme.labelMedium!.copyWith(fontSize: 22.0),
+                )
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Chuvoso',
+                  style: theme.textTheme.labelMedium,
+                )
+              ],
+            )
+          ],
+        ),
+      ],
+    );
+  }
 }
