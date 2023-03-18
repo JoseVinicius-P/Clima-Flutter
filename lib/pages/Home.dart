@@ -177,47 +177,6 @@ class _Home extends State<Home>{
 
 }
 
-class TimeCondition extends StatelessWidget {
-  const TimeCondition({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(width: 5.0),
-        Container(
-          decoration: BoxDecoration(
-          color: MyColors.whiteTranparent70,
-            borderRadius: BorderRadius.all(
-              Radius.circular(40.0),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text('Agora'),
-                Image(
-                  image: AssetImage('assets/images/cludy.png'),
-                  width: 40,
-                  fit: BoxFit.cover,
-                ),
-                Text('25º')
-              ],
-            ),
-          ),
-
-        ),
-        SizedBox(width: 5.0),
-      ],
-    );
-  }
-}
-
 class CurrentWeatherLayout extends StatelessWidget {
   const CurrentWeatherLayout({
     super.key,
@@ -346,6 +305,47 @@ class _ConditionWeatherState extends State<ConditionWeather> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class TimeCondition extends StatelessWidget {
+  const TimeCondition({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 5.0),
+        Container(
+          decoration: BoxDecoration(
+            color: MyColors.whiteTranparent70,
+            borderRadius: BorderRadius.all(
+              Radius.circular(40.0),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text('Agora'),
+                Image(
+                  image: AssetImage('assets/images/cludy.png'),
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+                Text('25º')
+              ],
+            ),
+          ),
+
+        ),
+        SizedBox(width: 5.0),
+      ],
     );
   }
 }
