@@ -59,41 +59,14 @@ class _Home extends State<Home>{
                     ),
                   ],
                 ),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 CurrentWeatherLayout(theme: theme),
-                SizedBox(height: 70),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: MyColors.whiteTranparent70,
-                    borderRadius:BorderRadius.all(
-                      Radius.circular(20.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(17.0)
-                            )
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Image(
-                              image: AssetImage('assets/images/cludy.png'),
-                              width: 50,
-                              fit: BoxFit.cover,
-                              filterQuality: FilterQuality.high,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
+                const SizedBox(height: 70),
+                ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
+                const SizedBox(height: 10),
+                ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
+                const SizedBox(height: 10),
+                ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
               ],
             ),
           ),
@@ -151,6 +124,87 @@ class CurrentWeatherLayout extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class ConditionWeather extends StatefulWidget {
+  const ConditionWeather({
+    Key? key,
+    required this.string_dado,
+    required this.theme,
+    required this.dado,
+  }) : super(key: key);
+
+  final String string_dado;
+  final ThemeData theme;
+  final String dado;
+
+  @override
+  State<ConditionWeather> createState() => _ConditionWeatherState();
+}
+
+class _ConditionWeatherState extends State<ConditionWeather> {
+
+  String getImage(String string){
+    String image;
+    if(widget.string_dado == 'Chuva'){
+      image = 'umbrella.png';
+    }else if(widget.string_dado == 'Vento'){
+      image = 'wind.png';
+    }else{
+      image = 'humidity.png';
+    }
+
+    return image;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: MyColors.whiteTranparent70,
+        borderRadius:BorderRadius.all(
+          Radius.circular(20.0),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, top: 15.0, bottom: 15.0),
+        child: Row(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12.0)
+                )
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Image(
+                  image: AssetImage('assets/images/${getImage(widget.string_dado)}'),
+                  width: 40,
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              widget.string_dado,
+              style: widget.theme.textTheme.labelMedium?.copyWith(fontSize: 15.0),
+            ),
+            Expanded(
+              child: Text(
+                widget.dado,
+                style: widget.theme.textTheme.labelMedium?.copyWith(fontSize: 15.0),
+                textAlign: TextAlign.end,
+              )
+            ),
+            const SizedBox(width: 20),
+          ],
+        ),
+      ),
     );
   }
 }
