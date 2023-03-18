@@ -1,4 +1,5 @@
 
+import 'package:clima/pages/NextSevenDays.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 
@@ -119,7 +120,7 @@ class _Home extends State<Home>{
                               ),
                               Spacer(),
                               TextButton(
-                                onPressed: (){},
+                                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDays())),
                                 style: ButtonStyle(
                                   overlayColor: MaterialStateProperty.resolveWith<Color>(
                                         (Set<MaterialState> states) {
