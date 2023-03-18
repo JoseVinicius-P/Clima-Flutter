@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(fontSize: 36.0, color: MyColors.textColor),
         ),
       ),
-      home: const SearchCity(title: MyStrings.pesquisarCidade),
+      home: const SearchCity(),
     );
   }
 }

@@ -3,9 +3,7 @@ import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 
 class SearchCity extends StatefulWidget {
-  const SearchCity({super.key, required this.title});
-
-  final String title;
+  const SearchCity({super.key});
 
   @override
   State<SearchCity> createState() => _SearchCityState();
