@@ -39,135 +39,126 @@ class _Home extends State<Home>{
               )
           ),
           child: SingleChildScrollView(
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover,
-                  )
-              ),
-              child: Column(
-                children: [
-                  SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),
-                      child:  Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Iaciara, Goiás',
-                                style: theme.textTheme.titleLarge,
-                                textAlign: TextAlign.left,
+            child: Column(
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),
+                    child:  Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Iaciara, Goiás',
+                              style: theme.textTheme.titleLarge,
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Seg, 30 jun',
+                              style: theme.textTheme.labelSmall,
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 15.0),
+                        CurrentWeatherLayout(theme: theme),
+                        const SizedBox(height: 70),
+                        ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
+                        const SizedBox(height: 10),
+                        ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
+                        const SizedBox(height: 10),
+                        ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
+                        SizedBox(height: 40),
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: (){},
+                              child: Text(
+                                'Hoje',
+                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0, fontWeight: FontWeight.bold),
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Seg, 30 jun',
-                                style: theme.textTheme.labelSmall,
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15.0),
-                          CurrentWeatherLayout(theme: theme),
-                          const SizedBox(height: 70),
-                          ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
-                          const SizedBox(height: 10),
-                          ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
-                          const SizedBox(height: 10),
-                          ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
-                          SizedBox(height: 40),
-                          Row(
-                            children: [
-                              TextButton(
-                                onPressed: (){},
-                                child: Text(
-                                  'Hoje',
-                                  style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0, fontWeight: FontWeight.bold),
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed)) {
+                                      return MyColors.textColorPrimary.withOpacity(0.2);
+                                    }
+                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
+                                  },
                                 ),
-                                style: ButtonStyle(
-                                  overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                    (Set<MaterialState> states) {
-                                      if (states.contains(MaterialState.pressed)) {
-                                        return MyColors.textColorPrimary.withOpacity(0.2);
-                                      }
-                                      return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
-                                    },
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            TextButton(
+                              onPressed: (){},
+                              child: Text(
+                                'Amanhã',
+                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
+                              ),
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed)) {
+                                      return MyColors.textColorPrimary.withOpacity(0.2);
+                                    }
+                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
+                                  },
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            TextButton(
+                              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDays())),
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed)) {
+                                      return MyColors.textColorPrimary.withOpacity(0.2);
+                                    }
+                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
+                                  },
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Próximos sete dias',
+                                    style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
+                                    textAlign: TextAlign.end,
                                   ),
-                                ),
+                                  SizedBox(width: 2),
+                                  const Icon(
+                                    Icons.navigate_next,
+                                    color: MyColors.textColorPrimary,
+                                  )
+                                ],
                               ),
-                              SizedBox(width: 5),
-                              TextButton(
-                                onPressed: (){},
-                                child: Text(
-                                  'Amanhã',
-                                  style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
-                                ),
-                                style: ButtonStyle(
-                                  overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                      if (states.contains(MaterialState.pressed)) {
-                                        return MyColors.textColorPrimary.withOpacity(0.2);
-                                      }
-                                      return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              TextButton(
-                                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDays())),
-                                style: ButtonStyle(
-                                  overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                      if (states.contains(MaterialState.pressed)) {
-                                        return MyColors.textColorPrimary.withOpacity(0.2);
-                                      }
-                                      return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
-                                    },
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Próximos sete dias',
-                                      style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
-                                      textAlign: TextAlign.end,
-                                    ),
-                                    SizedBox(width: 2),
-                                    const Icon(
-                                      Icons.navigate_next,
-                                      color: MyColors.textColorPrimary,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    child: ListView(
-                      shrinkWrap: true,
-                      primary: false,
-                      scrollDirection: Axis.horizontal,
-                      children: const <Widget>[
-                        SizedBox(width: 25.0),
-                        TimeCondition(),
-                        SizedBox(width: 25.0),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 25),
-                ],
-              ),
+                ),
+                Container(
+                  height: 100,
+                  child: ListView(
+                    shrinkWrap: true,
+                    primary: false,
+                    scrollDirection: Axis.horizontal,
+                    children: const <Widget>[
+                      SizedBox(width: 25.0),
+                      TimeCondition(),
+                      SizedBox(width: 25.0),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 25),
+              ],
             ),
           ),
       ),
