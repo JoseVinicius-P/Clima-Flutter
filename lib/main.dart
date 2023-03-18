@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
         //Tema para textos
         textTheme: const TextTheme(
           titleLarge: TextStyle(fontSize: 36.0, color: MyColors.textColorPrimary),
-          labelSmall: TextStyle(fontSize: 16.2, color: MyColors.textColorGrayLight, fontWeight: FontWeight.normal)
+          labelSmall: TextStyle(fontSize: 16.2, color: MyColors.textColorGrayLight, fontWeight: FontWeight.normal),
+          displayLarge: TextStyle(fontSize: 82.0, color: MyColors.textColorPrimary, fontWeight: FontWeight.bold),
+          labelMedium: TextStyle(fontSize: 25.0, color: MyColors.textColorPrimary, fontWeight: FontWeight.normal)
         ),
       ),
       home: const SearchCity(),
