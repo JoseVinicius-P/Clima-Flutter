@@ -76,7 +76,7 @@ class ButtonContinuar extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             backgroundColor: MyColors.whiteTranparent70,
-            foregroundColor: MyColors.textColor,
+            foregroundColor: MyColors.textColorPrimary,
             side: const BorderSide(
               width: 0,
               color: MyColors.whiteTranparent30,
@@ -101,9 +101,9 @@ class SearchTextField extends StatelessWidget {
 
     return TextFormField(
       style: const TextStyle(
-        color: MyColors.textColor,
+        color: MyColors.textColorPrimary,
       ),
-      cursorColor: MyColors.textColor,
+      cursorColor: MyColors.textColorPrimary,
       autocorrect: false,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -116,10 +116,10 @@ class SearchTextField extends StatelessWidget {
         ),
         prefixIcon: const Icon(
           Icons.search,
-          color: MyColors.textColor,
+          color: MyColors.textColorPrimary,
         ),
         hintText: MyStrings.pesquisar,
-        hintStyle: const TextStyle(color: MyColors.textColor),
+        hintStyle: const TextStyle(color: MyColors.textColorPrimary),
         filled: true,
         fillColor: MyColors.whiteTranparent30,
       ),
