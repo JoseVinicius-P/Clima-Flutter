@@ -28,46 +28,48 @@ class _Home extends State<Home>{
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/background.jpg'),
-              fit: BoxFit.cover,
-            )
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(30.0),
-            child: Column(
-              children: [
-                Row(
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+              )
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(30.0),
+              child:  Column(
                   children: [
-                    Text(
-                      'Iaciara, Goiás',
-                      style: theme.textTheme.titleLarge,
-                      textAlign: TextAlign.left,
+                    Row(
+                      children: [
+                        Text(
+                          'Iaciara, Goiás',
+                          style: theme.textTheme.titleLarge,
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          'Seg, 30 jun',
+                          style: theme.textTheme.labelSmall,
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15.0),
+                    CurrentWeatherLayout(theme: theme),
+                    const SizedBox(height: 70),
+                    ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
+                    const SizedBox(height: 10),
+                    ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
+                    const SizedBox(height: 10),
+                    ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Seg, 30 jun',
-                      style: theme.textTheme.labelSmall,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 15.0),
-                CurrentWeatherLayout(theme: theme),
-                const SizedBox(height: 70),
-                ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
-                const SizedBox(height: 10),
-                ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
-                const SizedBox(height: 10),
-                ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
-              ],
             ),
           ),
         ),
