@@ -31,7 +31,7 @@ class _SearchCityState extends State<SearchCity> {
           child: Column(
             children: [
               Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                   child:
                   Text(
                     MyStrings.vamosPesquisarSuaCidade,
@@ -49,11 +49,46 @@ class _SearchCityState extends State<SearchCity> {
                     ],
                   )
               ),
+              const Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: ButtonContinuar(),
+                      ),
+                  ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class ButtonContinuar extends StatelessWidget {
+  const ButtonContinuar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        style: OutlinedButton.styleFrom(
+            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            backgroundColor: MyColors.whiteTranparent70,
+            foregroundColor: MyColors.textColor,
+            side: const BorderSide(
+              width: 0,
+              color: MyColors.whiteTranparent30,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            minimumSize: const Size(double.infinity, 48)
+        ),
+        onPressed: (){},
+        child: const Text('Continuar'));
   }
 }
 

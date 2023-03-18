@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         //Tema para textos
         textTheme: const TextTheme(
           titleLarge: TextStyle(fontSize: 36.0, color: MyColors.textColor),
-        )
+        ),
       ),
       home: const SearchCity(title: MyStrings.pesquisarCidade),
     );
