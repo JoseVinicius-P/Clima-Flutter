@@ -1,3 +1,4 @@
+import 'package:clima/pages/Home.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class ButtonContinuar extends StatelessWidget {
             ),
             minimumSize: const Size(double.infinity, 48)
         ),
-        onPressed: (){},
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Home())),
         child: const Text('Continuar'));
   }
 }
