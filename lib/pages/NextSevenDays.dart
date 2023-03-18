@@ -15,8 +15,6 @@ class _NextSevenDays extends State<NextSevenDays>{
   Widget build(BuildContext context) {
 
     var theme = Theme.of(context);
-    final String img_name = 'umbrella.png';
-    final String dado = '22mm';
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -45,10 +43,11 @@ class _NextSevenDays extends State<NextSevenDays>{
               SafeArea(
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.whiteTranparent70,
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(20.0)
-                      )
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(20.0)
+                    ),
+
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(20.0),
@@ -89,13 +88,63 @@ class _NextSevenDays extends State<NextSevenDays>{
                   ),
                 ),
               ),
-              Row(
-                children: [
-
-                ],
-              )
+              SizedBox(height:30),
+              DayOfWeekWidget(dayWeek: 'Segunda', theme: theme, temperature: '25º', img_name: 'cludy.png'),
+              SizedBox(height:10),
+              DayOfWeekWidget(dayWeek: 'Terça', theme: theme, temperature: '22º', img_name: 'cludy.png'),
+              SizedBox(height:10),
+              DayOfWeekWidget(dayWeek: 'Quarta', theme: theme, temperature: '30º', img_name: 'cludy.png'),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DayOfWeekWidget extends StatelessWidget {
+  const DayOfWeekWidget({
+    super.key,
+    required this.dayWeek,
+    required this.theme,
+    required this.temperature,
+    required this.img_name,
+  });
+
+  final String dayWeek;
+  final ThemeData theme;
+  final String temperature;
+  final String img_name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.6),
+          borderRadius: BorderRadius.all(
+              Radius.circular(20.0)
+          )
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Text(
+              dayWeek,
+              style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0, fontWeight: FontWeight.bold),
+            ),
+            Spacer(),
+            Text(
+              temperature,
+              style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 5),
+            Image(
+              image: AssetImage('assets/images/$img_name'),
+              width: 40,
+              fit: BoxFit.cover,
+            ),
+          ],
         ),
       ),
     );
