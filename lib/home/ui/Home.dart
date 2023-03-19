@@ -253,9 +253,9 @@ class _ConditionWeatherState extends State<ConditionWeather> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: MyColors.whiteTranparent70,
-        borderRadius:BorderRadius.all(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.4),
+        borderRadius:const BorderRadius.all(
           Radius.circular(20.0),
         ),
       ),
@@ -309,15 +309,15 @@ class TimeCondition extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 5.0),
+        const SizedBox(width: 5.0),
         Container(
           decoration: BoxDecoration(
-            color: MyColors.whiteTranparent70,
-            borderRadius: BorderRadius.all(
+            color: Colors.white.withOpacity(0.4),
+            borderRadius: const BorderRadius.all(
               Radius.circular(40.0),
             ),
           ),
-          child: Padding(
+          child: const Padding(
             padding: EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -335,7 +335,7 @@ class TimeCondition extends StatelessWidget {
           ),
 
         ),
-        SizedBox(width: 5.0),
+        const SizedBox(width: 5.0),
       ],
     );
   }
