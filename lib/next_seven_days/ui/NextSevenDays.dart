@@ -42,7 +42,7 @@ class _NextSevenDays extends State<NextSevenDays>{
               SafeArea(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withOpacity(0.7),
                     borderRadius: BorderRadius.all(
                         Radius.circular(20.0)
                     ),
@@ -118,7 +118,7 @@ class DayOfWeekWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.6),
+          color: Colors.white.withOpacity(0.4),
           borderRadius: BorderRadius.all(
               Radius.circular(20.0)
           )
