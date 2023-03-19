@@ -1,127 +1,81 @@
-import 'package:clima/home/ui/Home.dart';
-import 'package:clima/values/MyColors.dart';
+import 'package:clima/search_city/ui/widgets/SearchTextField.dart';
+import 'package:clima/search_city/ui/widgets/button_next.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 
+//Classe tela de pesquisar cidade
 class SearchCity extends StatefulWidget {
   const SearchCity({super.key});
 
   @override
   State<SearchCity> createState() => _SearchCityState();
 }
-
 class _SearchCityState extends State<SearchCity> {
 
   @override
   Widget build(BuildContext context) {
 
+    //Criando variavel que aramzena o tema geral do app criado no arquivo main
     var theme = Theme.of(context);
 
     return Scaffold(
+      //Propriedade impede fundo de se mover quando reclado é ativo
       resizeToAvoidBottomInset: false,
       body: Container(
+        //Definido background
         decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.jpg'),
+              //Para impedir distorção da imagem
               fit: BoxFit.cover,
             )
         ),
+        //SafeArea para impedir que conteudo fique em cima de elementos da tela como status bar
         child: SafeArea(
+          //Conteudo da tela
           child: Column(
             children: [
+              //Definindo espaçamento entre texto e bordas da tela
               Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                   child:
                   Text(
+                    //Variavel definida no arquivo my_strings
                     MyStrings.vamosPesquisarSuaCidade,
+                    //Tema definido no main
                     style: theme.textTheme.titleLarge,
                   )
               ),
               const Center(
                   child: Column(
+                    //alinhando eelementos no topo
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
+                        //definindo espaço entre bordas e elemento
                         padding: EdgeInsets.all(20.0),
+                        //adicionando text fild de pesquisa personalizado
                         child: SearchTextField(),
                       ),
                     ],
                   )
               ),
+              //para ocupar espaço da tela e manter o botão alinhado abaixo
               const Expanded(
                   child: Align(
+                    // alinhando no centro na parte inferior
                     alignment: Alignment.bottomCenter,
                       child: Padding(
+                        //definindo espaço entre bordas e elemento
                         padding: EdgeInsets.all(20.0),
-                        child: ButtonContinuar(),
+                        //adicionando button de pesquisa personalizado
+                        child: ButtonNext(),
                       ),
                   ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ButtonContinuar extends StatelessWidget {
-  const ButtonContinuar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            backgroundColor: Colors.white.withOpacity(0.4),
-            foregroundColor: MyColors.textColorPrimary,
-            side: BorderSide(
-              width: 0,
-              color: Colors.white.withOpacity(0.3),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            minimumSize: const Size(double.infinity, 48)
-        ),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Home())),
-        child: const Text('Continuar'));
-  }
-}
-
-class SearchTextField extends StatelessWidget {
-  const SearchTextField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-
-    return TextFormField(
-      style: const TextStyle(
-        color: MyColors.textColorPrimary,
-      ),
-      cursorColor: MyColors.textColorPrimary,
-      autocorrect: false,
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.circular(15.5),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.circular(15.5),
-        ),
-        prefixIcon: const Icon(
-          Icons.search,
-          color: MyColors.textColorPrimary,
-        ),
-        hintText: MyStrings.pesquisar,
-        hintStyle: const TextStyle(color: MyColors.textColorPrimary),
-        filled: true,
-        fillColor: Colors.white.withOpacity(0.3),
       ),
     );
   }
