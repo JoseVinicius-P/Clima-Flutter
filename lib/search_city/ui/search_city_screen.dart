@@ -1,16 +1,16 @@
-import 'package:clima/search_city/ui/widgets/SearchTextField.dart';
-import 'package:clima/search_city/ui/widgets/button_next.dart';
+import 'package:clima/search_city/ui/widgets/search_textfield_widget.dart';
+import 'package:clima/search_city/ui/widgets/button_next_widget.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 
 //Classe tela de pesquisar cidade
-class SearchCity extends StatefulWidget {
-  const SearchCity({super.key});
+class SearchCityScreen extends StatefulWidget {
+  const SearchCityScreen({super.key});
 
   @override
-  State<SearchCity> createState() => _SearchCityState();
+  State<SearchCityScreen> createState() => _SearchCityScreenState();
 }
-class _SearchCityState extends State<SearchCity> {
+class _SearchCityScreenState extends State<SearchCityScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _SearchCityState extends State<SearchCity> {
                         //definindo espaço entre bordas e elemento
                         padding: EdgeInsets.all(20.0),
                         //adicionando text fild de pesquisa personalizado
-                        child: SearchTextField(),
+                        child: SearchTextFieldWidget(),
                       ),
                     ],
                   )
@@ -69,7 +69,7 @@ class _SearchCityState extends State<SearchCity> {
                         //definindo espaço entre bordas e elemento
                         padding: EdgeInsets.all(20.0),
                         //adicionando button de pesquisa personalizado
-                        child: ButtonNext(),
+                        child: ButtonNextWidget(),
                       ),
                   ),
               ),

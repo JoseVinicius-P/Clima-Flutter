@@ -2,8 +2,9 @@ import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 
-class SearchTextField extends StatelessWidget {
-  const SearchTextField({
+//Classe usada como textfield de pesquisa na tela de pesquisar cidade
+class SearchTextFieldWidget extends StatelessWidget {
+  const SearchTextFieldWidget({
     super.key,
   });
 
@@ -11,11 +12,14 @@ class SearchTextField extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return TextFormField(
+      //definindo estilo do texto
       style: const TextStyle(
         color: MyColors.textColorPrimary,
       ),
       cursorColor: MyColors.textColorPrimary,
+      //retirando autocorreção de texto
       autocorrect: false,
+      //definindo estilo do container do textfield
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.transparent),
@@ -25,12 +29,15 @@ class SearchTextField extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.transparent),
           borderRadius: BorderRadius.circular(15.5),
         ),
+        //definindo icone
         prefixIcon: const Icon(
           Icons.search,
           color: MyColors.textColorPrimary,
         ),
+        //Definindo hint usando varivel da classe personalizada MyStrings
         hintText: MyStrings.pesquisar,
         hintStyle: const TextStyle(color: MyColors.textColorPrimary),
+        //perimitindo preenchimento do container
         filled: true,
         fillColor: Colors.white.withOpacity(0.3),
       ),
