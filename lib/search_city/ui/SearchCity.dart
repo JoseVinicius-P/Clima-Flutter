@@ -1,4 +1,4 @@
-import 'package:clima/pages/Home.dart';
+import 'package:clima/home/ui/Home.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';

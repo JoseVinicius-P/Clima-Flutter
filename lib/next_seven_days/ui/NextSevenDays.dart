@@ -1,5 +1,4 @@
-import 'package:clima/values/MyColors.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class NextSevenDays extends StatefulWidget{
@@ -47,7 +46,6 @@ class _NextSevenDays extends State<NextSevenDays>{
                     borderRadius: BorderRadius.all(
                         Radius.circular(20.0)
                     ),
-
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(20.0),

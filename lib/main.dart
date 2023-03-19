@@ -1,4 +1,4 @@
-import 'package:clima/pages/SearchCity.dart';
+import 'package:clima/search_city/ui/SearchCity.dart';
 import 'package:flutter/material.dart';
 import 'values/MyColors.dart';
 import 'values/MyStrings.dart';

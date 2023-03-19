@@ -1,5 +1,5 @@
 
-import 'package:clima/pages/NextSevenDays.dart';
+import 'package:clima/next_seven_days/ui/NextSevenDays.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 
