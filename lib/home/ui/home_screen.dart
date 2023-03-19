@@ -39,17 +39,15 @@ class _Home extends State<HomeScreen>{
           ),
         ],
       ),
-      //Este collumn é definida para que possamos colocar o container
+      //Este Stack é definida para que possamos colocar o container
       //com o papel de parede sem depender do scrrol view, dessa forma
       //o papel de parede sempre cupará a tela toda
-      body: Column(
+      body: Stack(
         //Para ocupar o máximo de espaço
-        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             //Backgroud que ocupa tanto na largura como na altura o máximo de espaço possivel
             width: double.infinity,
-            height: double.infinity,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/background.jpg'),
@@ -199,7 +197,7 @@ class _Home extends State<HomeScreen>{
                   ),
                 ),
                 //Espaço ao final da tela
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
               ],
             ),
           ),
