@@ -1,28 +1,37 @@
 
+import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
+import 'package:clima/home/ui/widgets/time_condition_widget.dart';
+import 'package:clima/home/ui/widgets/current_weather_widget.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget{
-  const Home({super.key});
+//Este tela é a principal do app, ele mostra os dados completos de tempo atual
+class HomeScreen extends StatefulWidget{
+  const HomeScreen({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  State<HomeScreen> createState() => _Home();
 
 }
 
-class _Home extends State<Home>{
+class _Home extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
 
+    //Obtendo tema geral do app
     var theme =  Theme.of(context);
+
     return Scaffold(
+      //Fazendo body ficar sob app bar
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        //forçando app bar ficar transparente o tempo todo
         forceMaterialTransparency: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        //Definindo icon que redireciona para tela de buscar cidade
         actions: <Widget> [
           IconButton(
               onPressed: (){},
@@ -30,22 +39,36 @@ class _Home extends State<Home>{
           ),
         ],
       ),
-      body: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              )
+      //Este collumn é definida para que possamos colocar o container
+      //com o papel de parede sem depender do scrrol view, dessa forma
+      //o papel de parede sempre cupará a tela toda
+      body: Column(
+        //Para ocupar o máximo de espaço
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            //Backgroud que ocupa tanto na largura como na altura o máximo de espaço possivel
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background.jpg'),
+                  fit: BoxFit.cover,
+                )
+            ),
           ),
-          child: SingleChildScrollView(
+          //Esse SingleChildScrollView é usado para que em caso de telas
+          //pesquenas ou em rotação orizontal o usuário consiga rola para ver o conteudo
+          SingleChildScrollView(
             child: Column(
               children: [
+                //Para conteúdo não ocupar a status bar e app bar
                 SafeArea(
                   child: Padding(
                     padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),
                     child:  Column(
                       children: [
+                        //Este elemento é a cidade que o usuário selecionou
                         Row(
                           children: [
                             Text(
@@ -55,6 +78,7 @@ class _Home extends State<Home>{
                             ),
                           ],
                         ),
+                        //Estes são os dados de data
                         Row(
                           children: [
                             Text(
@@ -65,40 +89,49 @@ class _Home extends State<Home>{
                           ],
                         ),
                         const SizedBox(height: 15.0),
-                        CurrentWeatherLayout(theme: theme),
+                        //Este elemento contain os dados principais como imagem
+                        //que representa o clima, temperatura e descrição do clima
+                        CurrentWeatherWidget(),
                         const SizedBox(height: 70),
-                        ConditionWeather(string_dado: 'Chuva', theme: theme, dado: '10mm'),
+                        //Cada item deste define um tipo de condição do tempo
+                        ConditionWeatherWidget(string_dado: 'Chuva', dado: '10mm'),
                         const SizedBox(height: 10),
-                        ConditionWeather(string_dado: 'Vento', theme: theme, dado: '10km/h'),
+                        ConditionWeatherWidget(string_dado: 'Vento', dado: '10km/h'),
                         const SizedBox(height: 10),
-                        ConditionWeather(string_dado: 'Humidade', theme: theme, dado: '50%'),
+                        ConditionWeatherWidget(string_dado: 'Humidade', dado: '50%'),
                         SizedBox(height: 40),
+                        //Este row armazena os botões Hoje, Amanhã e Próximos sete dias
                         Row(
                           children: [
+                            //Botão Hoje
                             TextButton(
                               onPressed: (){},
                               child: Text(
                                 'Hoje',
                                 style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0, fontWeight: FontWeight.bold),
                               ),
+                              //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
+                                      (Set<MaterialState> states) {
                                     if (states.contains(MaterialState.pressed)) {
                                       return MyColors.textColorPrimary.withOpacity(0.2);
                                     }
-                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
+                                    return Colors.transparent;
                                   },
                                 ),
                               ),
                             ),
+                            //Espaço entre botões
                             SizedBox(width: 5),
+                            //Botão amanhã
                             TextButton(
                               onPressed: (){},
                               child: Text(
                                 'Amanhã',
                                 style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
                               ),
+                              //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
@@ -110,19 +143,24 @@ class _Home extends State<Home>{
                                 ),
                               ),
                             ),
+                            //Spacer é usado para ocupar todos o espaço forcando o próximo elemento a alinhar-se a direita
                             Spacer(),
+                            //Botão Proximos sete dias
                             TextButton(
+                              //Redireciona para a tela NextSevenDaysScreen
                               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDaysScreen())),
+                              //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
                                     if (states.contains(MaterialState.pressed)) {
                                       return MyColors.textColorPrimary.withOpacity(0.2);
                                     }
-                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
+                                    return Colors.transparent;
                                   },
                                 ),
                               ),
+                              //Aqui são definidos o que vai compor o botões um texto e um icone
                               child: Row(
                                 children: [
                                   Text(
@@ -144,199 +182,30 @@ class _Home extends State<Home>{
                     ),
                   ),
                 ),
+                //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
                 Container(
                   height: 100,
+                  //Este ListView exibirá os dados de tempo por hora
                   child: ListView(
                     shrinkWrap: true,
                     primary: false,
                     scrollDirection: Axis.horizontal,
                     children: const <Widget>[
                       SizedBox(width: 25.0),
-                      TimeCondition(),
+                      //Este widget é usado como um item da lista e nele serão exibidas as informações por hora
+                      TimeConditionWidget(),
                       SizedBox(width: 25.0),
                     ],
                   ),
                 ),
+                //Espaço ao final da tela
                 const SizedBox(height: 25),
               ],
             ),
           ),
-      ),
-
-    );
-  }
-
-}
-
-class CurrentWeatherLayout extends StatelessWidget {
-  const CurrentWeatherLayout({
-    super.key,
-    required this.theme,
-  });
-
-  final ThemeData theme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Image(
-          image: AssetImage('assets/images/cludy.png'),
-          width: 150,
-          fit: BoxFit.cover,
-          filterQuality: FilterQuality.high,
-        ),
-        SizedBox(width: 15.0),
-        Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '19',
-                  style: theme.textTheme.displayLarge,
-                ),
-                Text(
-                  'ºC',
-                  style: theme.textTheme.labelMedium!.copyWith(fontSize: 22.0),
-                )
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  'Chuvoso',
-                  style: theme.textTheme.labelMedium,
-                )
-              ],
-            )
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class ConditionWeather extends StatefulWidget {
-  const ConditionWeather({
-    Key? key,
-    required this.string_dado,
-    required this.theme,
-    required this.dado,
-  }) : super(key: key);
-
-  final String string_dado;
-  final ThemeData theme;
-  final String dado;
-
-  @override
-  State<ConditionWeather> createState() => _ConditionWeatherState();
-}
-
-class _ConditionWeatherState extends State<ConditionWeather> {
-
-  String getImage(String string){
-    String image;
-    if(widget.string_dado == 'Chuva'){
-      image = 'umbrella.png';
-    }else if(widget.string_dado == 'Vento'){
-      image = 'wind.png';
-    }else{
-      image = 'humidity.png';
-    }
-
-    return image;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.4),
-        borderRadius:const BorderRadius.all(
-          Radius.circular(20.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, top: 15.0, bottom: 15.0),
-        child: Row(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12.0)
-                )
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Image(
-                  image: AssetImage('assets/images/${getImage(widget.string_dado)}'),
-                  width: 40,
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.high,
-                ),
-              ),
-            ),
-            SizedBox(width: 10),
-            Text(
-              widget.string_dado,
-              style: widget.theme.textTheme.labelMedium?.copyWith(fontSize: 15.0),
-            ),
-            Expanded(
-              child: Text(
-                widget.dado,
-                style: widget.theme.textTheme.labelMedium?.copyWith(fontSize: 15.0),
-                textAlign: TextAlign.end,
-              )
-            ),
-            const SizedBox(width: 20),
-          ],
-        ),
+        ],
       ),
     );
   }
-}
 
-class TimeCondition extends StatelessWidget {
-  const TimeCondition({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const SizedBox(width: 5.0),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.4),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(40.0),
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text('Agora'),
-                Image(
-                  image: AssetImage('assets/images/cludy.png'),
-                  width: 40,
-                  fit: BoxFit.cover,
-                ),
-                Text('25º')
-              ],
-            ),
-          ),
-
-        ),
-        const SizedBox(width: 5.0),
-      ],
-    );
-  }
 }

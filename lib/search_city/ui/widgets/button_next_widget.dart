@@ -1,4 +1,4 @@
-import 'package:clima/home/ui/Home.dart';
+import 'package:clima/home/ui/home_screen.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +27,7 @@ class ButtonNextWidget extends StatelessWidget {
             minimumSize: const Size(double.infinity, 48)
         ),
         // Redirecionando para tela Home quando clicado
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Home())),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen())),
         child: const Text('Continuar'));
   }
 }
