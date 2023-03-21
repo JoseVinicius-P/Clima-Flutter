@@ -1,10 +1,13 @@
+import 'package:clima/home/models/current_weather_model.dart';
 import 'package:flutter/material.dart';
 
 //Este widget é o principal da tela home_screen,
 //exibindo uma imagem temperatura e descrição do tempo grandes
 class CurrentWeatherWidget extends StatelessWidget {
+  final CurrentWeatherModel currentWeather;
   const CurrentWeatherWidget({
     super.key,
+    required this.currentWeather,
   });
 
   @override
@@ -34,7 +37,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '19',
+                  currentWeather.temperature.round().toString(),
                   style: theme.textTheme.displayLarge,
                 ),
                 Text(
