@@ -7,10 +7,10 @@ class InterpreterWeatherCode{
       case 2:
         return 'Pouco Nublado';
       case 3:
-        return 'Encoberto';
+        return 'Nublado';
       case 45:
       case 48:
-        return 'Nevoeiro';
+        return 'Neblina';
       case 51:
       case 53:
       case 56:
