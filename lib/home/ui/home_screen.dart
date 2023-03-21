@@ -1,4 +1,6 @@
 
+import 'package:clima/home/models/current_weather_model.dart';
+import 'package:clima/home/repositories/current_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/time_condition_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
@@ -16,6 +18,14 @@ class HomeScreen extends StatefulWidget{
 }
 
 class _Home extends State<HomeScreen>{
+
+  late Future<CurrentWeatherModel> futureCurrentWeather;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +99,16 @@ class _Home extends State<HomeScreen>{
                         const SizedBox(height: 15.0),
                         //Este elemento contain os dados principais como imagem
                         //que representa o clima, temperatura e descrição do clima
-                        CurrentWeatherWidget(),
+                        FutureBuilder<CurrentWeatherModel>(
+                          future: futureCurrentWeather,
+                          builder: (context, snapshot){
+                            if(snapshot.hasData){
+                              return CurrentWeatherWidget(currentWeather: snapshot.data!);
+                            }else{
+                              return SizedBox(height: 140);
+                            }
+                          },
+                        ),
                         const SizedBox(height: 70),
                         //Cada item deste define um tipo de condição do tempo
                         ConditionWeatherWidget(string_dado: 'Chuva', dado: '10mm'),
@@ -205,5 +224,4 @@ class _Home extends State<HomeScreen>{
       ),
     );
   }
-
 }
