@@ -1,3 +1,4 @@
+import 'package:clima/home/blocs/interpreter_weather_code.dart';
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,8 @@ class CurrentWeatherWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         //Imagem que representa como está o tempo
-        const Image(
-          image: AssetImage('assets/images/cludy.png'),
+        Image(
+          image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(currentWeather.weathercode)}'),
           width: 150,
           fit: BoxFit.cover,
           filterQuality: FilterQuality.high,
@@ -51,7 +52,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text(
-                  'Chuvoso',
+                  InterpreterWeatherCode.getDescriptionWeather(currentWeather.weathercode),
                   style: theme.textTheme.labelMedium,
                 )
               ],
