@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clima/home/blocs/interpreter_weather_code.dart';
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:flutter/material.dart';
@@ -49,11 +50,18 @@ class CurrentWeatherWidget extends StatelessWidget {
             ),
             //Este row contain somente a descrição do clima
             Row(
-              mainAxisSize: MainAxisSize.max,
               children: [
-                Text(
-                  InterpreterWeatherCode.getDescriptionWeather(currentWeather.weathercode),
-                  style: theme.textTheme.labelMedium,
+                Container(
+                  width: 150,
+                  child: AutoSizeText(
+                    InterpreterWeatherCode.getDescriptionWeather(currentWeather.weathercode),
+                    style: theme.textTheme.labelMedium,
+                    maxLines: 2,
+                    maxFontSize: 25,
+                    minFontSize: 15,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                ),
                 )
               ],
             )
