@@ -111,11 +111,38 @@ class _Home extends State<HomeScreen>{
                         ),
                         const SizedBox(height: 70),
                         //Cada item deste define um tipo de condição do tempo
-                        ConditionWeatherWidget(string_dado: 'Chuva', dado: '0mm'),
+                        FutureBuilder<CurrentWeatherModel>(
+                            future: futureCurrentWeather,
+                            builder: (context, snapshot){
+                              if(snapshot.hasData){
+                                return ConditionWeatherWidget(string_dado: 'Chuva', dado: '${snapshot.data!.precipitation_probability_max}%');
+                              }else{
+                                return SizedBox(height: 60);
+                              }
+                            }
+                        ),
                         const SizedBox(height: 10),
-                        ConditionWeatherWidget(string_dado: 'Vento', dado: '10km/h'),
+                        FutureBuilder<CurrentWeatherModel>(
+                          future: futureCurrentWeather,
+                          builder: (context, snapshot){
+                            if(snapshot.hasData){
+                              return ConditionWeatherWidget(string_dado: 'Vento', dado: '${snapshot.data!.windspeed}km/h');
+                            }else{
+                              return SizedBox(height: 60);
+                            }
+                          }
+                        ),
                         const SizedBox(height: 10),
-                        ConditionWeatherWidget(string_dado: 'Humidade', dado: '50%'),
+                        FutureBuilder<CurrentWeatherModel>(
+                            future: futureCurrentWeather,
+                            builder: (context, snapshot){
+                              if(snapshot.hasData){
+                                return ConditionWeatherWidget(string_dado: 'Precipitação', dado: '${snapshot.data!.precipitation_sum}mm');
+                              }else{
+                                return SizedBox(height: 60);
+                              }
+                            }
+                        ),
                         SizedBox(height: 40),
                         //Este row armazena os botões Hoje, Amanhã e Próximos sete dias
                         Row(

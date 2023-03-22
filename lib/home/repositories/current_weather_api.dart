@@ -11,8 +11,7 @@ class CurrentWeatherApi {
 
     if(response.statusCode == 200){
       final decodedJson = jsonDecode(response.body);
-      print(jsonEncode(decodedJson['current_weather']));
-      return CurrentWeatherModel.fromJson(decodedJson['current_weather']);
+      return CurrentWeatherModel.fromJson(decodedJson);
     }else{
       throw Exception('Failed to load album');
     }
