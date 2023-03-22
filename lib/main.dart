@@ -1,3 +1,4 @@
+import 'package:clima/home/ui/home_screen.dart';
 import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:flutter/material.dart';
 import 'values/MyColors.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           titleSmall: TextStyle(fontSize: 18.0, color: MyColors.textColorPrimary, fontWeight: FontWeight.normal)
         ),
       ),
-      home: const SearchCityScreen(),
+      home: const HomeScreen(),
     );
   }
 }
