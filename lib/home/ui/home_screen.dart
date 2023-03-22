@@ -73,7 +73,7 @@ class _Home extends State<HomeScreen>{
                 //Para conteúdo não ocupar a status bar e app bar
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),
+                    padding: EdgeInsets.only(top: 10.0, right: 30.0, left: 30.0),
                     child:  Column(
                       children: [
                         //Este elemento é a cidade que o usuário selecionou
