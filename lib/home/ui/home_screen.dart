@@ -111,7 +111,7 @@ class _Home extends State<HomeScreen>{
                         ),
                         const SizedBox(height: 70),
                         //Cada item deste define um tipo de condição do tempo
-                        ConditionWeatherWidget(string_dado: 'Chuva', dado: '10mm'),
+                        ConditionWeatherWidget(string_dado: 'Chuva', dado: '0mm'),
                         const SizedBox(height: 10),
                         ConditionWeatherWidget(string_dado: 'Vento', dado: '10km/h'),
                         const SizedBox(height: 10),
@@ -210,8 +210,12 @@ class _Home extends State<HomeScreen>{
                     children: const <Widget>[
                       SizedBox(width: 25.0),
                       //Este widget é usado como um item da lista e nele serão exibidas as informações por hora
-                      TimeConditionWidget(),
-                      SizedBox(width: 25.0),
+                      TimeConditionWidget(time: 'Agora', weathercode: 3, temperature: '22',),
+                      TimeConditionWidget(time: '21:00', weathercode: 3, temperature: '22',),
+                      TimeConditionWidget(time: '22:00', weathercode: 56, temperature: '22',),
+                      TimeConditionWidget(time: '23:00', weathercode: 56, temperature: '22',),
+                      TimeConditionWidget(time: '00:00', weathercode: 3, temperature: '22',),
+                      TimeConditionWidget(time: '01:00', weathercode: 3, temperature: '22',),
                     ],
                   ),
                 ),
