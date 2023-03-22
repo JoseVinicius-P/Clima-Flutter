@@ -7,6 +7,7 @@ import 'package:clima/home/ui/widgets/current_weather_widget.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
 class HomeScreen extends StatefulWidget{
@@ -105,7 +106,23 @@ class _Home extends State<HomeScreen>{
                             if(snapshot.hasData){
                               return CurrentWeatherWidget(currentWeather: snapshot.data!);
                             }else{
-                              return SizedBox(height: 140);
+                              return SizedBox(
+                                height: 170,
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.transparent,
+                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
+                                    enabled: true,
+                                    child: Container(
+                                      height: 170.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.deepOrange.withOpacity(0.4),
+                                        borderRadius:const BorderRadius.all(
+                                          Radius.circular(20.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              );
                             }
                           },
                         ),
@@ -117,7 +134,23 @@ class _Home extends State<HomeScreen>{
                               if(snapshot.hasData){
                                 return ConditionWeatherWidget(string_dado: 'Chuva', dado: '${snapshot.data!.precipitation_probability_max}%');
                               }else{
-                                return SizedBox(height: 60);
+                                return SizedBox(
+                                  height: 70,
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.transparent,
+                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
+                                    enabled: true,
+                                    child: Container(
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                        color: Colors.deepOrange.withOpacity(0.4),
+                                        borderRadius:const BorderRadius.all(
+                                          Radius.circular(20.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               }
                             }
                         ),
@@ -128,7 +161,23 @@ class _Home extends State<HomeScreen>{
                             if(snapshot.hasData){
                               return ConditionWeatherWidget(string_dado: 'Vento', dado: '${snapshot.data!.windspeed}km/h');
                             }else{
-                              return SizedBox(height: 60);
+                              return SizedBox(
+                                height: 70,
+                                child: Shimmer.fromColors(
+                                  baseColor: Colors.transparent,
+                                  highlightColor: Colors.deepOrange.withOpacity(0.4),
+                                  enabled: true,
+                                  child: Container(
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepOrange.withOpacity(0.4),
+                                      borderRadius:const BorderRadius.all(
+                                        Radius.circular(20.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
                             }
                           }
                         ),
@@ -139,7 +188,23 @@ class _Home extends State<HomeScreen>{
                               if(snapshot.hasData){
                                 return ConditionWeatherWidget(string_dado: 'Precipitação', dado: '${snapshot.data!.precipitation_sum}mm');
                               }else{
-                                return SizedBox(height: 60);
+                                return SizedBox(
+                                  height: 70,
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.transparent,
+                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
+                                    enabled: true,
+                                    child: Container(
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                        color: Colors.deepOrange.withOpacity(0.4),
+                                        borderRadius:const BorderRadius.all(
+                                          Radius.circular(20.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               }
                             }
                         ),

@@ -36,8 +36,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  #Para chamadas http
   http: ^0.13.5
+  #Para usar widget que redimenciona o texto dependendo do espaço
   auto_size_text: ^3.0.0
+  #Para carregamento skeleton
+  shimmer: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:
