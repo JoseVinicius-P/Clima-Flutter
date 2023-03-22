@@ -1,10 +1,16 @@
+import 'package:clima/home/blocs/interpreter_weather_code.dart';
 import 'package:flutter/material.dart';
 
 //Este widget é usado para listar a previsão do tempo por hora na tela home_screen
 class TimeConditionWidget extends StatelessWidget {
+  final String time;
+  final int weathercode;
+  final String temperature;
   const TimeConditionWidget({
-    super.key,
+    super.key, required this.time, required this.weathercode, required this.temperature,
   });
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class TimeConditionWidget extends StatelessWidget {
               Radius.circular(40.0),
             ),
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Column(
               //alinhando filhos para que ocupem o espaço no elemento uniformemente
@@ -30,13 +36,13 @@ class TimeConditionWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 //Exibindo informações do tempo em determinada hora
-                Text('Agora'),
+                Text(time),
                 Image(
-                  image: AssetImage('assets/images/cludy.png'),
+                  image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(weathercode)}'),
                   width: 40,
                   fit: BoxFit.cover,
                 ),
-                Text('25º')
+                Text('$temperatureº')
               ],
             ),
           ),
