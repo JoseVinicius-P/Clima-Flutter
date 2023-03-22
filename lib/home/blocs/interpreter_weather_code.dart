@@ -33,9 +33,12 @@ class InterpreterWeatherCode{
         return 'Neve';
       case 81:
       case 82:
+      case 95:
+      case 96:
+      case 99:
         return 'Tempestade';
       default:
-        return ' ';
+        return 'Céu limpo';
 
     }
   }
@@ -74,9 +77,12 @@ class InterpreterWeatherCode{
         return 'overcast.png';
       case 81:
       case 82:
+      case 95:
+      case 96:
+      case 99:
         return 'rain.png';
       default:
-        return ' ';
+        return 'sunny.png';
     }
   }
 }
