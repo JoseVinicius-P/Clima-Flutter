@@ -9,6 +9,7 @@ import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/values/MyColors.dart';
+import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -36,7 +37,7 @@ class _Home extends State<HomeScreen>{
 
     //Obtendo tema geral do app
     var theme =  Theme.of(context);
-    //Define cor que será exibida quando usuário tocar no textbuttom
+    //Define cor que será exibida quando usuário tocar no textbutton
     var overlayColor = MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
@@ -119,7 +120,7 @@ class _Home extends State<HomeScreen>{
                             future: futureCurrentWeather,
                             builder: (context, snapshot){
                               if(snapshot.hasData){
-                                return ConditionWeatherWidget(string_dado: 'Chuva', dado: '${snapshot.data!.precipitation_probability_max}%');
+                                return ConditionWeatherWidget(string_dado: MyStrings.chuva, dado: '${snapshot.data!.precipitation_probability_max}%');
                               }else{
                                 return ContainerShimmerWidget(height: 70);
                               }
@@ -130,7 +131,7 @@ class _Home extends State<HomeScreen>{
                           future: futureCurrentWeather,
                           builder: (context, snapshot){
                             if(snapshot.hasData){
-                              return ConditionWeatherWidget(string_dado: 'Vento', dado: '${snapshot.data!.windspeed}km/h');
+                              return ConditionWeatherWidget(string_dado: MyStrings.vento, dado: '${snapshot.data!.windspeed}km/h');
                             }else{
                               return ContainerShimmerWidget(height: 70);
                             }
@@ -141,7 +142,7 @@ class _Home extends State<HomeScreen>{
                             future: futureCurrentWeather,
                             builder: (context, snapshot){
                               if(snapshot.hasData){
-                                return ConditionWeatherWidget(string_dado: 'Precipitação', dado: '${snapshot.data!.precipitation_sum}mm');
+                                return ConditionWeatherWidget(string_dado: MyStrings.precipitacao, dado: '${snapshot.data!.precipitation_sum}mm');
                               }else{
                                 return ContainerShimmerWidget(height: 70);
                               }
@@ -155,7 +156,7 @@ class _Home extends State<HomeScreen>{
                             TextButton(
                               onPressed: (){},
                               child: Text(
-                                'Hoje',
+                                MyStrings.hoje,
                                 style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0, fontWeight: FontWeight.bold),
                               ),
                               //Este código define a cor que será usada em caso de clique do usuário
@@ -169,7 +170,7 @@ class _Home extends State<HomeScreen>{
                             TextButton(
                               onPressed: (){},
                               child: Text(
-                                'Amanhã',
+                                MyStrings.amanha,
                                 style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
                               ),
                               //Este código define a cor que será usada em caso de clique do usuário
@@ -191,7 +192,7 @@ class _Home extends State<HomeScreen>{
                               child: Row(
                                 children: [
                                   Text(
-                                    'Próximos sete dias',
+                                    MyStrings.proximosSeteDias,
                                     style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
                                     textAlign: TextAlign.end,
                                   ),
