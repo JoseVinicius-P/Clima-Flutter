@@ -7,6 +7,7 @@ import 'package:clima/home/ui/widgets/current_weather_widget.dart';
 import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
+import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -35,6 +36,15 @@ class _Home extends State<HomeScreen>{
 
     //Obtendo tema geral do app
     var theme =  Theme.of(context);
+    //Define cor que será exibida quando usuário tocar no textbuttom
+    var overlayColor = MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed)) {
+          return MyColors.textColorPrimary.withOpacity(0.2);
+        }
+        return Colors.transparent;
+      },
+    );
 
     return Scaffold(
       //Fazendo body ficar sob app bar
@@ -99,23 +109,7 @@ class _Home extends State<HomeScreen>{
                             if(snapshot.hasData){
                               return CurrentWeatherWidget(currentWeather: snapshot.data!);
                             }else{
-                              return SizedBox(
-                                height: 170,
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.transparent,
-                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
-                                    enabled: true,
-                                    child: Container(
-                                      height: 170.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.deepOrange.withOpacity(0.4),
-                                        borderRadius:const BorderRadius.all(
-                                          Radius.circular(20.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                              );
+                              return ContainerShimmerWidget(height: 170);
                             }
                           },
                         ),
@@ -127,23 +121,7 @@ class _Home extends State<HomeScreen>{
                               if(snapshot.hasData){
                                 return ConditionWeatherWidget(string_dado: 'Chuva', dado: '${snapshot.data!.precipitation_probability_max}%');
                               }else{
-                                return SizedBox(
-                                  height: 70,
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.transparent,
-                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
-                                    enabled: true,
-                                    child: Container(
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        color: Colors.deepOrange.withOpacity(0.4),
-                                        borderRadius:const BorderRadius.all(
-                                          Radius.circular(20.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
+                                return ContainerShimmerWidget(height: 70);
                               }
                             }
                         ),
@@ -154,23 +132,7 @@ class _Home extends State<HomeScreen>{
                             if(snapshot.hasData){
                               return ConditionWeatherWidget(string_dado: 'Vento', dado: '${snapshot.data!.windspeed}km/h');
                             }else{
-                              return SizedBox(
-                                height: 70,
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.transparent,
-                                  highlightColor: Colors.deepOrange.withOpacity(0.4),
-                                  enabled: true,
-                                  child: Container(
-                                    height: 70,
-                                    decoration: BoxDecoration(
-                                      color: Colors.deepOrange.withOpacity(0.4),
-                                      borderRadius:const BorderRadius.all(
-                                        Radius.circular(20.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
+                              return ContainerShimmerWidget(height: 70);
                             }
                           }
                         ),
@@ -181,23 +143,7 @@ class _Home extends State<HomeScreen>{
                               if(snapshot.hasData){
                                 return ConditionWeatherWidget(string_dado: 'Precipitação', dado: '${snapshot.data!.precipitation_sum}mm');
                               }else{
-                                return SizedBox(
-                                  height: 70,
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.transparent,
-                                    highlightColor: Colors.deepOrange.withOpacity(0.4),
-                                    enabled: true,
-                                    child: Container(
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        color: Colors.deepOrange.withOpacity(0.4),
-                                        borderRadius:const BorderRadius.all(
-                                          Radius.circular(20.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
+                                return ContainerShimmerWidget(height: 70);
                               }
                             }
                         ),
@@ -214,14 +160,7 @@ class _Home extends State<HomeScreen>{
                               ),
                               //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.pressed)) {
-                                      return MyColors.textColorPrimary.withOpacity(0.2);
-                                    }
-                                    return Colors.transparent;
-                                  },
-                                ),
+                                overlayColor: overlayColor,
                               ),
                             ),
                             //Espaço entre botões
@@ -235,14 +174,7 @@ class _Home extends State<HomeScreen>{
                               ),
                               //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.pressed)) {
-                                      return MyColors.textColorPrimary.withOpacity(0.2);
-                                    }
-                                    return Colors.transparent;// Use a cor padrão se não houver nenhuma cor de sobreposição definida
-                                  },
-                                ),
+                                overlayColor: overlayColor,
                               ),
                             ),
                             //Spacer é usado para ocupar todos o espaço forcando o próximo elemento a alinhar-se a direita
@@ -253,14 +185,7 @@ class _Home extends State<HomeScreen>{
                               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDaysScreen())),
                               //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.pressed)) {
-                                      return MyColors.textColorPrimary.withOpacity(0.2);
-                                    }
-                                    return Colors.transparent;
-                                  },
-                                ),
+                                overlayColor: overlayColor,
                               ),
                               //Aqui são definidos o que vai compor o botões um texto e um icone
                               child: Row(
