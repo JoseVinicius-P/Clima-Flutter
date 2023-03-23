@@ -5,6 +5,7 @@ import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/time_condition_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
+import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -56,16 +57,7 @@ class _Home extends State<HomeScreen>{
       body: Stack(
         //Para ocupar o máximo de espaço
         children: [
-          Container(
-            //Backgroud que ocupa tanto na largura como na altura o máximo de espaço possivel
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/background.jpg'),
-                  fit: BoxFit.cover,
-                )
-            ),
-          ),
+          BackgroundWidget(),
           //Esse SingleChildScrollView é usado para que em caso de telas
           //pesquenas ou em rotação orizontal o usuário consiga rola para ver o conteudo
           SingleChildScrollView(
