@@ -4,6 +4,7 @@ import 'package:clima/home/repositories/current_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/time_condition_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
+import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/values/MyColors.dart';
@@ -46,7 +47,7 @@ class _Home extends State<HomeScreen>{
         //Definindo icon que redireciona para tela de buscar cidade
         actions: <Widget> [
           IconButton(
-              onPressed: (){},
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchCityScreen())),
               icon: Icon(Icons.search),
           ),
         ],
