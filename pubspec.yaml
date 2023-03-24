@@ -42,6 +42,8 @@ dependencies:
   auto_size_text: ^3.0.0
   #Para carregamento skeleton
   shimmer: ^2.0.0
+  #Para formatar datas
+  intl: ^0.18.0
 
 
 dev_dependencies:
