@@ -13,7 +13,7 @@ class CurrentWeatherApi {
       final decodedJson = jsonDecode(response.body);
       return CurrentWeatherModel.fromJson(decodedJson);
     }else{
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load current weather');
     }
   }
 }
