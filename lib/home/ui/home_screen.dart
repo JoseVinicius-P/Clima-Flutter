@@ -1,6 +1,8 @@
 
 import 'package:clima/home/models/current_weather_model.dart';
+import 'package:clima/home/models/hourly_weather_model.dart';
 import 'package:clima/home/repositories/current_weather_api.dart';
+import 'package:clima/home/repositories/hourly_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/time_condition_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
@@ -25,11 +27,13 @@ class HomeScreen extends StatefulWidget{
 class _Home extends State<HomeScreen>{
 
   late Future<CurrentWeatherModel> futureCurrentWeather;
+  late Future<HourlyWeatherModel> futureHourlyWeather;
 
   @override
   void initState() {
     super.initState();
     futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather();
+    futureHourlyWeather = HourlyWeatherApi().fetchHourlyWeather();
   }
 
   @override
@@ -210,14 +214,36 @@ class _Home extends State<HomeScreen>{
                     ),
                   ),
                 ),
-                //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
-                Container(
-                  height: 100,
-                  //Este ListView exibirá os dados de tempo por hora
-                  child: ListView(
-                    shrinkWrap: true,
-                    primary: false,
-                    scrollDirection: Axis.horizontal,
+                FutureBuilder<HourlyWeatherModel>(
+                  future: futureHourlyWeather,
+                  builder: (context, snapshot){
+                    if(snapshot.hasData){
+                      return Container(
+                        height: 100,
+                        //Este ListView exibirá os dados de tempo por hora
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data?.time.length,
+                          itemBuilder: (context, index){
+                            return TimeConditionWidget(
+                              time: snapshot.data!.time[index],
+                              weathercode: snapshot.data!.weathercode[index],
+                              temperature: snapshot.data!.temperature_2m[index]
+                            );
+                          }
+                        )
+                      );
+                    }else{
+                      return SizedBox(height: 100);
+                    }
+                  },
+                ),
+    //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
+
+                  /*,ListView(
+
                     children: const <Widget>[
                       SizedBox(width: 25.0),
                       //Este widget é usado como um item da lista e nele serão exibidas as informações por hora
@@ -228,8 +254,7 @@ class _Home extends State<HomeScreen>{
                       TimeConditionWidget(time: '00:00', weathercode: 3, temperature: '22',),
                       TimeConditionWidget(time: '01:00', weathercode: 3, temperature: '22',),
                     ],
-                  ),
-                ),
+                  ),*/
                 //Espaço ao final da tela
                 const SizedBox(height: 10),
               ],
