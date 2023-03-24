@@ -7,7 +7,7 @@ class HourlyWeatherApi {
 
   Future<HourlyWeatherModel> fetchHourlyWeather() async {
     final response = await http
-        .get(Uri.parse('https://api.open-meteo.com/v1/forecast?latitude=-14.10&longitude=-46.63&hourly=temperature_2m,weathercode&timezone=America%2FSao_Paulo'));
+        .get(Uri.parse('https://api.open-meteo.com/v1/forecast?latitude=-14.10&longitude=-46.63&hourly=temperature_2m,weathercode&forecast_days=2&timezone=America%2FSao_Paulo'));
 
     if(response.statusCode == 200){
       final decodedJson = jsonDecode(response.body);
