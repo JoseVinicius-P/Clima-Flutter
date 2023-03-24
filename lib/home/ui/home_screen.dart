@@ -114,7 +114,7 @@ class _Home extends State<HomeScreen>{
                             if(snapshot.hasData){
                               return CurrentWeatherWidget(currentWeather: snapshot.data!);
                             }else{
-                              return ContainerShimmerWidget(height: 170);
+                              return ContainerShimmerWidget(height: 140);
                             }
                           },
                         ),
@@ -218,6 +218,7 @@ class _Home extends State<HomeScreen>{
                   future: futureHourlyWeather,
                   builder: (context, snapshot){
                     if(snapshot.hasData){
+                      //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
                       return Container(
                         height: 100,
                         //Este ListView exibirá os dados de tempo por hora
@@ -227,34 +228,46 @@ class _Home extends State<HomeScreen>{
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data?.time.length,
                           itemBuilder: (context, index){
-                            return TimeConditionWidget(
-                              time: snapshot.data!.time[index],
-                              weathercode: snapshot.data!.weathercode[index],
-                              temperature: snapshot.data!.temperature_2m[index]
-                            );
+                            if(index == 0){
+                              return Row(
+                                children: [
+                                  SizedBox(width: 30),
+                                  TimeConditionWidget(
+                                  time: snapshot.data!.time[index],
+                                  weathercode: snapshot.data!.weathercode[index],
+                                  temperature: snapshot.data!.temperature_2m[index]
+                                  ),
+                                ],
+                              );
+                            }else if(index == (snapshot.data!.time.length - 1)){
+                              return Row(
+                                children: [
+                                  TimeConditionWidget(
+                                      time: snapshot.data!.time[index],
+                                      weathercode: snapshot.data!.weathercode[index],
+                                      temperature: snapshot.data!.temperature_2m[index]
+                                  ),
+                                  SizedBox(width: 30),
+                                ],
+                              );
+                            }else{
+                              return TimeConditionWidget(
+                                  time: snapshot.data!.time[index],
+                                  weathercode: snapshot.data!.weathercode[index],
+                                  temperature: snapshot.data!.temperature_2m[index]
+                              );
+                            }
                           }
                         )
                       );
                     }else{
-                      return SizedBox(height: 100);
+                      return Padding(
+                        padding: EdgeInsets.only(right: 30, left: 30),
+                        child: ContainerShimmerWidget(height: 100),
+                      );
                     }
                   },
                 ),
-    //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
-
-                  /*,ListView(
-
-                    children: const <Widget>[
-                      SizedBox(width: 25.0),
-                      //Este widget é usado como um item da lista e nele serão exibidas as informações por hora
-                      TimeConditionWidget(time: 'Agora', weathercode: 3, temperature: '22',),
-                      TimeConditionWidget(time: '21:00', weathercode: 3, temperature: '22',),
-                      TimeConditionWidget(time: '22:00', weathercode: 56, temperature: '22',),
-                      TimeConditionWidget(time: '23:00', weathercode: 56, temperature: '22',),
-                      TimeConditionWidget(time: '00:00', weathercode: 3, temperature: '22',),
-                      TimeConditionWidget(time: '01:00', weathercode: 3, temperature: '22',),
-                    ],
-                  ),*/
                 //Espaço ao final da tela
                 const SizedBox(height: 10),
               ],
