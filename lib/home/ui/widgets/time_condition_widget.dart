@@ -10,8 +10,6 @@ class TimeConditionWidget extends StatelessWidget {
   const TimeConditionWidget({
     super.key, required this.time, required this.weathercode, required this.temperature,
   });
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +20,9 @@ class TimeConditionWidget extends StatelessWidget {
         const SizedBox(width: 5.0),
         //definindo fundo e radius do container do item
         Container(
+          width: 60,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.4),
+            color: time.hour == DateTime.now().hour ? Colors.white.withOpacity(0.8) : Colors.white.withOpacity(0.4),
             borderRadius: const BorderRadius.all(
               Radius.circular(40.0),
             ),

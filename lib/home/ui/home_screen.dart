@@ -1,4 +1,3 @@
-
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:clima/home/models/hourly_weather_model.dart';
 import 'package:clima/home/repositories/current_weather_api.dart';
@@ -13,7 +12,6 @@ import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
 class HomeScreen extends StatefulWidget{
@@ -28,6 +26,7 @@ class _Home extends State<HomeScreen>{
 
   late Future<CurrentWeatherModel> futureCurrentWeather;
   late Future<HourlyWeatherModel> futureHourlyWeather;
+  var hourlyWeatherIsToday = true;
 
   @override
   void initState() {
@@ -50,6 +49,12 @@ class _Home extends State<HomeScreen>{
         return Colors.transparent;
       },
     );
+
+    void setIsToday(bool hourlyWeatherIsToday){
+      setState(() {
+        this.hourlyWeatherIsToday = hourlyWeatherIsToday;
+      });
+    }
 
     return Scaffold(
       //Fazendo body ficar sob app bar
@@ -158,28 +163,33 @@ class _Home extends State<HomeScreen>{
                           children: [
                             //Botão Hoje
                             TextButton(
-                              onPressed: (){},
-                              child: Text(
-                                MyStrings.hoje,
-                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0, fontWeight: FontWeight.bold),
-                              ),
+                              onPressed: () => setIsToday(true),
                               //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
                                 overlayColor: overlayColor,
+                              ),
+                              child: Text(
+                                MyStrings.hoje,
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                    fontSize: hourlyWeatherIsToday ? 15 : 13,
+                                    fontWeight: hourlyWeatherIsToday ? FontWeight.bold : FontWeight.normal),
                               ),
                             ),
                             //Espaço entre botões
                             SizedBox(width: 5),
                             //Botão amanhã
                             TextButton(
-                              onPressed: (){},
-                              child: Text(
-                                MyStrings.amanha,
-                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
-                              ),
+                              onPressed: () => setIsToday(false),
                               //Este código define a cor que será usada em caso de clique do usuário
                               style: ButtonStyle(
                                 overlayColor: overlayColor,
+                              ),
+                              child: Text(
+                                MyStrings.amanha,
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                    fontSize: hourlyWeatherIsToday ? 13 : 15,
+                                    fontWeight: hourlyWeatherIsToday ? FontWeight.normal : FontWeight.bold,
+                                ),
                               ),
                             ),
                             //Spacer é usado para ocupar todos o espaço forcando o próximo elemento a alinhar-se a direita
@@ -219,46 +229,9 @@ class _Home extends State<HomeScreen>{
                   builder: (context, snapshot){
                     if(snapshot.hasData){
                       //Este container foi definido com altura fixa por que não é permitido usar o ListView sem definir sua altura
-                      return Container(
-                        height: 100,
-                        //Este ListView exibirá os dados de tempo por hora
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          primary: false,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data?.time.length,
-                          itemBuilder: (context, index){
-                            if(index == 0){
-                              return Row(
-                                children: [
-                                  SizedBox(width: 30),
-                                  TimeConditionWidget(
-                                  time: snapshot.data!.time[index],
-                                  weathercode: snapshot.data!.weathercode[index],
-                                  temperature: snapshot.data!.temperature_2m[index]
-                                  ),
-                                ],
-                              );
-                            }else if(index == (snapshot.data!.time.length - 1)){
-                              return Row(
-                                children: [
-                                  TimeConditionWidget(
-                                      time: snapshot.data!.time[index],
-                                      weathercode: snapshot.data!.weathercode[index],
-                                      temperature: snapshot.data!.temperature_2m[index]
-                                  ),
-                                  SizedBox(width: 30),
-                                ],
-                              );
-                            }else{
-                              return TimeConditionWidget(
-                                  time: snapshot.data!.time[index],
-                                  weathercode: snapshot.data!.weathercode[index],
-                                  temperature: snapshot.data!.temperature_2m[index]
-                              );
-                            }
-                          }
-                        )
+                      return ListHourlyWeatherWidget(
+                          hourlyWeatherIsToday: hourlyWeatherIsToday,
+                          hourlyWeatherModel: snapshot.data!,
                       );
                     }else{
                       return Padding(
@@ -275,6 +248,68 @@ class _Home extends State<HomeScreen>{
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListHourlyWeatherWidget extends StatefulWidget {
+  final bool hourlyWeatherIsToday;
+  final HourlyWeatherModel hourlyWeatherModel;
+
+  const ListHourlyWeatherWidget({
+    super.key,
+    required this.hourlyWeatherIsToday,
+    required this.hourlyWeatherModel,
+  });
+
+  @override
+  State<ListHourlyWeatherWidget> createState() => _ListHourlyWeatherWidgetState();
+
+}
+
+class _ListHourlyWeatherWidgetState extends State<ListHourlyWeatherWidget> {
+  final controller = ScrollController();
+
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.hourlyWeatherIsToday){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.jumpTo((70*DateTime.now().hour).toDouble());
+      });
+    }
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      //Este ListView exibirá os dados de tempo por hora
+      child: ListView.builder(
+        controller: controller,
+        shrinkWrap: true,
+        primary: false,
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.hourlyWeatherModel.time.length~/2,
+        itemBuilder: (context, index){
+          return Row(
+            children: [
+              if(index == 0)
+                SizedBox(width: 30),
+              TimeConditionWidget(
+              time: widget.hourlyWeatherModel.time[widget.hourlyWeatherIsToday ? index : index+24],
+              weathercode: widget.hourlyWeatherModel.weathercode[widget.hourlyWeatherIsToday ? index : index+24],
+              temperature: widget.hourlyWeatherModel.temperature_2m[widget.hourlyWeatherIsToday ? index : index+24],
+              ),
+              if(index == (widget.hourlyWeatherModel.time.length~/2) -1)
+                SizedBox(width: 30),
+            ],
+          );
+        }
+      )
     );
   }
 }
