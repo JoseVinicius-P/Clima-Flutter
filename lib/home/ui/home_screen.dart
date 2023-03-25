@@ -9,6 +9,7 @@ import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
+import 'package:clima/home/blocs/current_date.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _Home extends State<HomeScreen>{
                         Row(
                           children: [
                             Text(
-                              'Seg, 30 jun',
+                              CurrentDate().getCurrentDateFormatted(),
                               style: theme.textTheme.labelSmall,
                               textAlign: TextAlign.left,
                             ),
