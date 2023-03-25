@@ -3,7 +3,7 @@ import 'package:clima/home/models/hourly_weather_model.dart';
 import 'package:clima/home/repositories/current_weather_api.dart';
 import 'package:clima/home/repositories/hourly_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
-import 'package:clima/home/ui/widgets/time_condition_widget.dart';
+import 'package:clima/home/ui/widgets/list_hourly_weather_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
 import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
@@ -159,67 +159,79 @@ class _Home extends State<HomeScreen>{
                             }
                         ),
                         SizedBox(height: 40),
-                        //Este row armazena os botões Hoje, Amanhã e Próximos sete dias
-                        Row(
-                          children: [
-                            //Botão Hoje
-                            TextButton(
-                              onPressed: () => setIsToday(true),
-                              //Este código define a cor que será usada em caso de clique do usuário
-                              style: ButtonStyle(
-                                overlayColor: overlayColor,
-                              ),
-                              child: Text(
-                                MyStrings.hoje,
-                                style: theme.textTheme.labelMedium?.copyWith(
-                                    fontSize: hourlyWeatherIsToday ? 15 : 13,
-                                    fontWeight: hourlyWeatherIsToday ? FontWeight.bold : FontWeight.normal),
-                              ),
-                            ),
-                            //Espaço entre botões
-                            SizedBox(width: 5),
-                            //Botão amanhã
-                            TextButton(
-                              onPressed: () => setIsToday(false),
-                              //Este código define a cor que será usada em caso de clique do usuário
-                              style: ButtonStyle(
-                                overlayColor: overlayColor,
-                              ),
-                              child: Text(
-                                MyStrings.amanha,
-                                style: theme.textTheme.labelMedium?.copyWith(
-                                    fontSize: hourlyWeatherIsToday ? 13 : 15,
-                                    fontWeight: hourlyWeatherIsToday ? FontWeight.normal : FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            //Spacer é usado para ocupar todos o espaço forcando o próximo elemento a alinhar-se a direita
-                            Spacer(),
-                            //Botão Proximos sete dias
-                            TextButton(
-                              //Redireciona para a tela NextSevenDaysScreen
-                              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDaysScreen())),
-                              //Este código define a cor que será usada em caso de clique do usuário
-                              style: ButtonStyle(
-                                overlayColor: overlayColor,
-                              ),
-                              //Aqui são definidos o que vai compor o botões um texto e um icone
-                              child: Row(
+                        FutureBuilder<HourlyWeatherModel>(
+                          future: futureHourlyWeather,
+                          builder: (context, snapshot){
+                            if(snapshot.hasData){
+                              //Este row armazena os botões Hoje, Amanhã e Próximos sete dias
+                              return Row(
                                 children: [
-                                  Text(
-                                    MyStrings.proximosSeteDias,
-                                    style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
-                                    textAlign: TextAlign.end,
+                                  //Botão Hoje
+                                  TextButton(
+                                    onPressed: () => setIsToday(true),
+                                    //Este código define a cor que será usada em caso de clique do usuário
+                                    style: ButtonStyle(
+                                      overlayColor: overlayColor,
+                                    ),
+                                    child: Text(
+                                      MyStrings.hoje,
+                                      style: theme.textTheme.labelMedium?.copyWith(
+                                          fontSize: hourlyWeatherIsToday ? 15 : 13,
+                                          fontWeight: hourlyWeatherIsToday ? FontWeight.bold : FontWeight.normal),
+                                    ),
                                   ),
-                                  SizedBox(width: 2),
-                                  const Icon(
-                                    Icons.navigate_next,
-                                    color: MyColors.textColorPrimary,
-                                  )
+                                  //Espaço entre botões
+                                  SizedBox(width: 5),
+                                  //Botão amanhã
+                                  TextButton(
+                                    onPressed: () => setIsToday(false),
+                                    //Este código define a cor que será usada em caso de clique do usuário
+                                    style: ButtonStyle(
+                                      overlayColor: overlayColor,
+                                    ),
+                                    child: Text(
+                                      MyStrings.amanha,
+                                      style: theme.textTheme.labelMedium?.copyWith(
+                                        fontSize: hourlyWeatherIsToday ? 13 : 15,
+                                        fontWeight: hourlyWeatherIsToday ? FontWeight.normal : FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  //Spacer é usado para ocupar todos o espaço forcando o próximo elemento a alinhar-se a direita
+                                  Spacer(),
+                                  //Botão Proximos sete dias
+                                  TextButton(
+                                    //Redireciona para a tela NextSevenDaysScreen
+                                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDaysScreen())),
+                                    //Este código define a cor que será usada em caso de clique do usuário
+                                    style: ButtonStyle(
+                                      overlayColor: overlayColor,
+                                    ),
+                                    //Aqui são definidos o que vai compor o botões um texto e um icone
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          MyStrings.proximosSeteDias,
+                                          style: theme.textTheme.labelMedium?.copyWith(fontSize: 13.0),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                        SizedBox(width: 2),
+                                        const Icon(
+                                          Icons.navigate_next,
+                                          color: MyColors.textColorPrimary,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ],
-                              ),
-                            ),
-                          ],
+                              );
+                            }else{
+                              return Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: ContainerShimmerWidget(height: 40),
+                              );
+                            }
+                          }
                         ),
                       ],
                     ),
@@ -249,68 +261,6 @@ class _Home extends State<HomeScreen>{
           ),
         ],
       ),
-    );
-  }
-}
-
-class ListHourlyWeatherWidget extends StatefulWidget {
-  final bool hourlyWeatherIsToday;
-  final HourlyWeatherModel hourlyWeatherModel;
-
-  const ListHourlyWeatherWidget({
-    super.key,
-    required this.hourlyWeatherIsToday,
-    required this.hourlyWeatherModel,
-  });
-
-  @override
-  State<ListHourlyWeatherWidget> createState() => _ListHourlyWeatherWidgetState();
-
-}
-
-class _ListHourlyWeatherWidgetState extends State<ListHourlyWeatherWidget> {
-  final controller = ScrollController();
-
-
-  @override
-  void initState() {
-    super.initState();
-    if(widget.hourlyWeatherIsToday){
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.jumpTo((70*DateTime.now().hour).toDouble());
-      });
-    }
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      //Este ListView exibirá os dados de tempo por hora
-      child: ListView.builder(
-        controller: controller,
-        shrinkWrap: true,
-        primary: false,
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.hourlyWeatherModel.time.length~/2,
-        itemBuilder: (context, index){
-          return Row(
-            children: [
-              if(index == 0)
-                SizedBox(width: 30),
-              TimeConditionWidget(
-              time: widget.hourlyWeatherModel.time[widget.hourlyWeatherIsToday ? index : index+24],
-              weathercode: widget.hourlyWeatherModel.weathercode[widget.hourlyWeatherIsToday ? index : index+24],
-              temperature: widget.hourlyWeatherModel.temperature_2m[widget.hourlyWeatherIsToday ? index : index+24],
-              ),
-              if(index == (widget.hourlyWeatherModel.time.length~/2) -1)
-                SizedBox(width: 30),
-            ],
-          );
-        }
-      )
     );
   }
 }
