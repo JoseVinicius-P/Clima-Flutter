@@ -36,7 +36,7 @@ class TimeConditionWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 //Exibindo informações do tempo em determinada hora
-                Text(DateFormat.Hm().format(time)),
+                Text(time.day == DateTime.now().day && time.hour == DateTime.now().hour ? 'Agora' : DateFormat.Hm().format(time)),
                 Image(
                   image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(weathercode)}'),
                   width: 40,
