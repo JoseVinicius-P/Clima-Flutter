@@ -1,3 +1,4 @@
+import 'package:clima/search_city/repositories/search_city_api.dart';
 import 'package:clima/search_city/ui/widgets/search_textfield_widget.dart';
 import 'package:clima/search_city/ui/widgets/button_next_widget.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
@@ -18,6 +19,8 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
 
     //Criando variavel que aramzena o tema geral do app criado no arquivo main
     var theme = Theme.of(context);
+
+
 
     return Scaffold(
       //Propriedade impede fundo de se mover quando reclado é ativo
@@ -74,5 +77,11 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SearchCityApi().fetchSeachCities("iacia");
   }
 }
