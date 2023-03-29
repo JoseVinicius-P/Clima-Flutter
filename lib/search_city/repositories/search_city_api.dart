@@ -8,7 +8,7 @@ class SearchCityApi {
 
   Future<List<CityModel>> fetchCities({required String search}) async{
     final response = await http
-        .get(Uri.parse('https://geocoding-api.open-meteo.com/v1/search?name=iac&language=pt'));
+        .get(Uri.parse('https://geocoding-api.open-meteo.com/v1/search?name=$search&language=pt'));
 
     if(response.statusCode == 200){
       final decodedJson = jsonDecode(response.body);

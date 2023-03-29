@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 
 //Classe usada como textfield de pesquisa na tela de pesquisar cidade
 class SearchTextFieldWidget extends StatelessWidget {
+  //Esta função é recebida quando o item é instaciado, ela permite que o Widget pai possa executar códigos locais através deste widget
+  final Function(String) onTextChanged;
   const SearchTextFieldWidget({
-    super.key,
+    super.key, required this.onTextChanged,
   });
 
   @override
   Widget build(BuildContext context) {
 
     return TextFormField(
+      //Chamando função recebida do widget pai para alterar texto
+      onChanged: (text) => onTextChanged(text),
       //definindo estilo do texto
       style: const TextStyle(
         color: MyColors.textColorPrimary,

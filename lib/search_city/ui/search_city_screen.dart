@@ -4,6 +4,7 @@ import 'package:clima/search_city/ui/widgets/button_next_widget.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/search_city/models/city_model.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
+import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,22 @@ class SearchCityScreen extends StatefulWidget {
   State<SearchCityScreen> createState() => _SearchCityScreenState();
 }
 class _SearchCityScreenState extends State<SearchCityScreen> {
-  late Future<List<CityModel>> futureCities;
+  late Future<List<CityModel>> futureCities = Future.value([]);
+  Key key = UniqueKey();
 
   @override
   void initState() {
     super.initState();
-    futureCities = SearchCityApi().fetchCities(search: 'iac');
+    //futureCities = SearchCityApi().fetchCities(search: 'iac');
+  }
+
+  void updateSearch(String text) {
+    setState(() {
+      //Essa key é criada para o FutureBuilder sempre atualizar quando o estado for atualizado
+      key = UniqueKey();
+      //Alterando resultados da api quando usuário digitar
+      futureCities = SearchCityApi().fetchCities(search: text);
+    });
   }
 
   @override
@@ -58,36 +69,56 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                           //alinhando eelementos no topo
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Padding(
+                            Padding(
                               //definindo espaço entre bordas e elemento
                               padding: EdgeInsets.all(20.0),
                               //adicionando text fild de pesquisa personalizado
-                              child: SearchTextFieldWidget(),
+                              child: SearchTextFieldWidget(
+                                //Passando função para que o SearchTextFieldWidget consiga a executar de outro arquivo
+                                onTextChanged: (text) => updateSearch(text),
+                              ),
                             ),
                             FutureBuilder<List<CityModel>>(
+                              key: key,
                               future: futureCities,
                               builder: (context, snapshot){
                                 if(snapshot.hasData){
                                   return Container(
-                                    height: 200,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (context, index){
-                                        return
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                            child: Text(
-                                              '${snapshot.data![index].name}, ${snapshot.data![index].country}',
-                                              style: theme.textTheme.titleSmall,
-                                              textAlign: TextAlign.center,
-                                            )
+                                    child:
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (context, index){
+                                          return Padding(
+                                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                            child: Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: (){
+
+                                                  },
+                                                  child: Text(
+                                                    '${snapshot.data![index].name}, ${snapshot.data![index].country}',
+                                                    style: theme.textTheme.titleSmall,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                Divider(
+                                                  thickness: 1.0,
+                                                  color: MyColors.textColorPrimary.withOpacity(0.1),
+                                                ),
+                                              ],
+                                            ),
                                           );
-                                      },
-                                    ),
+                                        },
+                                      ),
                                   );
                                 }else{
-                                  return ContainerShimmerWidget(height: 35);
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                    child: ContainerShimmerWidget(height: 35),
+                                  );
                                 }
                               },
                             )
@@ -97,7 +128,7 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                   ],
                 ),
                 //para ocupar espaço da tela e manter o botão alinhado abaixo
-                const Expanded(
+                /*const Expanded(
                   child: Align(
                     // alinhando no centro na parte inferior
                     alignment: Alignment.bottomCenter,
@@ -108,7 +139,7 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                       child: ButtonNextWidget(),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
 
