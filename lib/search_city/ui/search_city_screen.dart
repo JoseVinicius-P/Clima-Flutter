@@ -1,6 +1,6 @@
+import 'package:clima/home/ui/home_screen.dart';
 import 'package:clima/search_city/repositories/search_city_api.dart';
 import 'package:clima/search_city/ui/widgets/search_textfield_widget.dart';
-import 'package:clima/search_city/ui/widgets/button_next_widget.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/search_city/models/city_model.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
@@ -94,9 +94,19 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                                             padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                             child: Column(
                                               children: [
-                                                InkWell(
+                                                GestureDetector(
                                                   onTap: (){
-
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => HomeScreen(
+                                                              nameCity: snapshot.data![index].name,
+                                                              country: snapshot.data![index].country,
+                                                              latitude: snapshot.data![index].latitude,
+                                                              longitude: snapshot.data![index].longitude
+                                                            )
+                                                        )
+                                                    );
                                                   },
                                                   child: Text(
                                                     '${snapshot.data![index].name}, ${snapshot.data![index].country}',
@@ -117,7 +127,16 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                                 }else{
                                   return Padding(
                                     padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                    child: ContainerShimmerWidget(height: 35),
+                                    child: Column(
+                                      children: [
+                                        ContainerShimmerWidget(height: 35),
+                                        SizedBox(height: 10),
+                                        ContainerShimmerWidget(height: 35),
+                                        SizedBox(height: 10),
+                                        ContainerShimmerWidget(height: 35),
+                                        SizedBox(height: 10),
+                                      ],
+                                    )
                                   );
                                 }
                               },
@@ -127,22 +146,8 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                     ),
                   ],
                 ),
-                //para ocupar espaço da tela e manter o botão alinhado abaixo
-                /*const Expanded(
-                  child: Align(
-                    // alinhando no centro na parte inferior
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      //definindo espaço entre bordas e elemento
-                      padding: EdgeInsets.all(20.0),
-                      //adicionando button de pesquisa personalizado
-                      child: ButtonNextWidget(),
-                    ),
-                  ),
-                ),*/
               ],
             ),
-
           ),
         ],
       ),

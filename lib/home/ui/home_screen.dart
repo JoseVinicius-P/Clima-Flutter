@@ -16,7 +16,17 @@ import 'package:flutter/material.dart';
 
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
 class HomeScreen extends StatefulWidget{
-  const HomeScreen({super.key});
+
+  final String nameCity, country;
+  final double longitude, latitude;
+
+  const HomeScreen({
+    super.key,
+    required this.nameCity,
+    required this.country,
+    required this.longitude,
+    required this.latitude
+  });
 
   @override
   State<HomeScreen> createState() => _Home();
@@ -95,7 +105,7 @@ class _Home extends State<HomeScreen>{
                         Row(
                           children: [
                             Text(
-                              'Iaciara, Goiás',
+                              '${widget.nameCity}, ${widget.country}',
                               style: theme.textTheme.titleLarge,
                               textAlign: TextAlign.left,
                             ),

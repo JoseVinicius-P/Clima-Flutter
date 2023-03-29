@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           titleSmall: TextStyle(fontSize: 18.0, color: MyColors.textColorPrimary, fontWeight: FontWeight.normal)
         ),
       ),
-      home: const HomeScreen(),
+      home: const SearchCityScreen(),
     );
   }
 }
