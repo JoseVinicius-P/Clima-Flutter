@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
 class HomeScreen extends StatefulWidget{
 
-  final String nameCity, country;
+  final String nameCity, country, timezone;
   final double longitude, latitude;
 
   const HomeScreen({
@@ -25,7 +25,8 @@ class HomeScreen extends StatefulWidget{
     required this.nameCity,
     required this.country,
     required this.longitude,
-    required this.latitude
+    required this.latitude,
+    required this.timezone
   });
 
   @override
@@ -42,8 +43,8 @@ class _Home extends State<HomeScreen>{
   @override
   void initState() {
     super.initState();
-    futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather();
-    futureHourlyWeather = HourlyWeatherApi().fetchHourlyWeather();
+    futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
+    futureHourlyWeather = HourlyWeatherApi().fetchHourlyWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
   }
 
   @override

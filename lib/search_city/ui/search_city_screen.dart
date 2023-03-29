@@ -103,7 +103,8 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                                                               nameCity: snapshot.data![index].name,
                                                               country: snapshot.data![index].country,
                                                               latitude: snapshot.data![index].latitude,
-                                                              longitude: snapshot.data![index].longitude
+                                                              longitude: snapshot.data![index].longitude,
+                                                              timezone: snapshot.data![index].timezone
                                                             )
                                                         )
                                                     );

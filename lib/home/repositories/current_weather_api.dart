@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 
 class CurrentWeatherApi {
 
-  Future<CurrentWeatherModel> fetchCurrentWeather() async{
+  Future<CurrentWeatherModel> fetchCurrentWeather({required double latitude, required double longitude, required String timezone}) async{
     final response = await http
-        .get(Uri.parse('https://api.open-meteo.com/v1/forecast?latitude=-14.10&longitude=-46.63&daily=precipitation_sum,precipitation_probability_max&current_weather=true&timezone=America%2FSao_Paulo'));
+        .get(Uri.parse('https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&daily=precipitation_sum,precipitation_probability_max&current_weather=true&timezone=$timezone'));
 
     if(response.statusCode == 200){
       final decodedJson = jsonDecode(response.body);
