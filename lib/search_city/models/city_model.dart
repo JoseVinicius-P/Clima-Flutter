@@ -1,5 +1,5 @@
 class CityModel {
-  final String name, timezone, country, admin1;
+  final String name, timezone, country;
   final double latitude, longitude;
 
   CityModel({
@@ -8,17 +8,14 @@ class CityModel {
     required this.longitude,
     required this.timezone,
     required this.country,
-    required this.admin1,
   });
 
-  factory CityModel.fromJson(Map<String, dynamic> json){
-    return CityModel(
+  factory CityModel.fromJson(Map<String, dynamic> json) =>
+      CityModel(
       name: json['name'],
       latitude: json['latitude'],
       longitude: json['longitude'],
-      timezone:json['timezone'],
+      timezone: json['timezone'],
       country: json['country'],
-      admin1: json['admin1'],
     );
-  }
 }
