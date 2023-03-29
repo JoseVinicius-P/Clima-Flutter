@@ -22,7 +22,7 @@ class ContainerShimmerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.deepOrange.withOpacity(0.4),
             borderRadius:const BorderRadius.all(
-              Radius.circular(20.0),
+              Radius.circular(12.0),
             ),
           ),
         ),
