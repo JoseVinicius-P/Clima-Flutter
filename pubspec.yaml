@@ -44,6 +44,8 @@ dependencies:
   shimmer: ^2.0.0
   #Para formatar datas
   intl: ^0.18.0
+  #Para persistencia de dados simples
+  shared_preferences: ^2.0.20
 
 
 dev_dependencies:
