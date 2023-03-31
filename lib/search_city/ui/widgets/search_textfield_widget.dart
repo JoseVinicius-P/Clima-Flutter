@@ -16,9 +16,7 @@ class SearchTextFieldWidget extends StatelessWidget {
     return TextFormField(
       //Chamando função recebida do widget pai para alterar texto
       onChanged: (text) {
-        if(text.length >= 3) {
-          onTextChanged(text.trim());
-        }
+        onTextChanged(text.trim());
       },
       //definindo estilo do texto
       style: const TextStyle(
