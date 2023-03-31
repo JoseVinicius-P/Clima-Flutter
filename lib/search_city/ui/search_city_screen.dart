@@ -26,12 +26,21 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
   }
 
   void updateSearch(String text) {
-    setState(() {
-      //Essa key é criada para o FutureBuilder sempre atualizar quando o estado for atualizado
-      key = UniqueKey();
-      //Alterando resultados da api quando usuário digitar
-      futureCities = SearchCityApi().fetchCities(search: text);
-    });
+    if(text.length >= 3){
+      setState(() {
+        //Essa key é criada para o FutureBuilder sempre atualizar quando o estado for atualizado
+        key = UniqueKey();
+        //Alterando resultados da api quando usuário digitar
+        futureCities = SearchCityApi().fetchCities(search: text);
+      });
+    }else{
+      //Caso tenham menos de 3 caracteres nada será exibido
+      setState(() {
+        //Essa key é criada para o FutureBuilder sempre atualizar quando o estado for atualizado
+        key = UniqueKey();
+        futureCities = Future.value([]);
+      });
+    }
   }
 
   @override
@@ -85,59 +94,59 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                                 if(snapshot.hasData){
                                   return Container(
                                     child:
-                                      ListView.builder(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount: snapshot.data!.length,
-                                        itemBuilder: (context, index){
-                                          return Padding(
-                                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => HomeScreen(
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (context, index){
+                                        return Padding(
+                                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                          child: Column(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => HomeScreen(
                                                               nameCity: snapshot.data![index].name,
                                                               country: snapshot.data![index].country,
                                                               latitude: snapshot.data![index].latitude,
                                                               longitude: snapshot.data![index].longitude,
                                                               timezone: snapshot.data![index].timezone
-                                                            )
-                                                        )
-                                                    );
-                                                  },
-                                                  child: Text(
-                                                    '${snapshot.data![index].name}, ${snapshot.data![index].country}',
-                                                    style: theme.textTheme.titleSmall,
-                                                    textAlign: TextAlign.center,
-                                                  ),
+                                                          )
+                                                      )
+                                                  );
+                                                },
+                                                child: Text(
+                                                  '${snapshot.data![index].name}, ${snapshot.data![index].country}',
+                                                  style: theme.textTheme.titleSmall,
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                                Divider(
-                                                  thickness: 1.0,
-                                                  color: MyColors.textColorPrimary.withOpacity(0.1),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
+                                              ),
+                                              Divider(
+                                                thickness: 1.0,
+                                                color: MyColors.textColorPrimary.withOpacity(0.1),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   );
                                 }else{
                                   return Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                    child: Column(
-                                      children: [
-                                        ContainerShimmerWidget(height: 35),
-                                        SizedBox(height: 10),
-                                        ContainerShimmerWidget(height: 35),
-                                        SizedBox(height: 10),
-                                        ContainerShimmerWidget(height: 35),
-                                        SizedBox(height: 10),
-                                      ],
-                                    )
+                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                      child: Column(
+                                        children: [
+                                          ContainerShimmerWidget(height: 35),
+                                          SizedBox(height: 10),
+                                          ContainerShimmerWidget(height: 35),
+                                          SizedBox(height: 10),
+                                          ContainerShimmerWidget(height: 35),
+                                          SizedBox(height: 10),
+                                        ],
+                                      )
                                   );
                                 }
                               },
