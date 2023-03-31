@@ -46,7 +46,7 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
 
   Future<void> saveCity(CityModel cityModel) async {
     SharedPreferences prefsCity = await SharedPreferences.getInstance();
-    prefsCity.setString('nameCity', cityModel.name);
+    prefsCity.setString('name', cityModel.name);
     prefsCity.setString('country', cityModel.country);
     prefsCity.setDouble('latitude', cityModel.latitude);
     prefsCity.setDouble('longitude', cityModel.longitude);
