@@ -7,6 +7,7 @@ import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Classe tela de pesquisar cidade
 class SearchCityScreen extends StatefulWidget {
@@ -41,6 +42,30 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
         futureCities = Future.value([]);
       });
     }
+  }
+
+  Future<void> saveCity(CityModel cityModel) async {
+    SharedPreferences prefsCity = await SharedPreferences.getInstance();
+    prefsCity.setString('nameCity', cityModel.name);
+    prefsCity.setString('country', cityModel.country);
+    prefsCity.setDouble('latitude', cityModel.latitude);
+    prefsCity.setDouble('longitude', cityModel.longitude);
+    prefsCity.setString('timezone', cityModel.timezone);
+  }
+
+  void toHomeScreen (CityModel cityModel){
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomeScreen(
+                nameCity: cityModel.name,
+                country: cityModel.country,
+                latitude: cityModel.latitude,
+                longitude: cityModel.longitude,
+                timezone: cityModel.timezone,
+            )
+        )
+    );
   }
 
   @override
@@ -105,18 +130,8 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
                                             children: [
                                               GestureDetector(
                                                 onTap: (){
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) => HomeScreen(
-                                                              nameCity: snapshot.data![index].name,
-                                                              country: snapshot.data![index].country,
-                                                              latitude: snapshot.data![index].latitude,
-                                                              longitude: snapshot.data![index].longitude,
-                                                              timezone: snapshot.data![index].timezone
-                                                          )
-                                                      )
-                                                  );
+                                                  saveCity(snapshot.data![index]);
+                                                  toHomeScreen(snapshot.data![index]);
                                                 },
                                                 child: Text(
                                                   '${snapshot.data![index].name}, ${snapshot.data![index].country}',
