@@ -48,10 +48,11 @@ class _Home extends State<HomeScreen>{
   }
   
   void toSearchCityScreen(){
-    Navigator.pushReplacementNamed(
-      context,
-      '/searchCityScreen',
-    );
+    Navigator.pushReplacementNamed(context, '/searchCityScreen',);
+  }
+
+  void toNextSevenDaysScreen(){
+    Navigator.pushNamed(context, '/nextSevenDaysScreen');
   }
 
   @override
@@ -220,7 +221,7 @@ class _Home extends State<HomeScreen>{
                                   //Botão Proximos sete dias
                                   TextButton(
                                     //Redireciona para a tela NextSevenDaysScreen
-                                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NextSevenDaysScreen())),
+                                    onPressed: () => toNextSevenDaysScreen(),
                                     //Este código define a cor que será usada em caso de clique do usuário
                                     style: ButtonStyle(
                                       overlayColor: overlayColor,
