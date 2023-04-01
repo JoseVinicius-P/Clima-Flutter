@@ -20,12 +20,6 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
   late Future<List<CityModel>> futureCities = Future.value([]);
   Key key = UniqueKey();
 
-  @override
-  void initState() {
-    super.initState();
-    //futureCities = SearchCityApi().fetchCities(search: 'iac');
-  }
-
   void updateSearch(String text) {
     if(text.length >= 3){
       setState(() {
@@ -54,17 +48,16 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
   }
 
   void toHomeScreen (CityModel cityModel){
-    Navigator.push(
+    Navigator.pushReplacementNamed(
         context,
-        MaterialPageRoute(
-            builder: (context) => HomeScreen(
-                nameCity: cityModel.name,
-                country: cityModel.country,
-                latitude: cityModel.latitude,
-                longitude: cityModel.longitude,
-                timezone: cityModel.timezone,
-            )
-        )
+        '/homeScreen',
+        arguments: {
+          'name': cityModel.name,
+          'country': cityModel.country,
+          'latitude': cityModel.latitude,
+          'longitude': cityModel.longitude,
+          'timezone': cityModel.timezone,
+        }
     );
   }
 
