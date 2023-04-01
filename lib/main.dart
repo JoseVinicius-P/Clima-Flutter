@@ -1,4 +1,5 @@
 import 'package:clima/home/ui/home_screen.dart';
+import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/search_city/models/city_model.dart';
 import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: MyStrings.clima,
+      routes: {
+        '/homeScreen': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return HomeScreen(
+              name: args['name'],
+              country: args['country'],
+              longitude: args['longitude'],
+              latitude: args['latitude'],
+              timezone: args['timezone']
+          );
+        },
+        'searchCityScreen': (context) => const SearchCityScreen(),
+        'nextSevenDaysScreen' : (context) => const NextSevenDaysScreen(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.textColorPrimary),
         useMaterial3: true,
@@ -63,7 +78,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: isCitySaved() ? HomeScreen(
-          nameCity: getCity().name,
+          name: getCity().name,
           country: getCity().country,
           longitude: getCity().longitude,
           latitude: getCity().latitude,
