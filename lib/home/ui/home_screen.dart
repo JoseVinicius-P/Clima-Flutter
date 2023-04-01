@@ -17,12 +17,12 @@ import 'package:flutter/material.dart';
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
 class HomeScreen extends StatefulWidget{
 
-  final String nameCity, country, timezone;
+  final String name, country, timezone;
   final double longitude, latitude;
 
   const HomeScreen({
     super.key,
-    required this.nameCity,
+    required this.name,
     required this.country,
     required this.longitude,
     required this.latitude,
@@ -45,6 +45,13 @@ class _Home extends State<HomeScreen>{
     super.initState();
     futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
     futureHourlyWeather = HourlyWeatherApi().fetchHourlyWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
+  }
+  
+  void toSearchCityScreen(){
+    Navigator.pushReplacementNamed(
+      context,
+      '/searchCityScreen',
+    );
   }
 
   @override
@@ -79,7 +86,7 @@ class _Home extends State<HomeScreen>{
         //Definindo icon que redireciona para tela de buscar cidade
         actions: <Widget> [
           IconButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchCityScreen())),
+              onPressed: () => toSearchCityScreen(),
               icon: Icon(Icons.search),
           ),
         ],
@@ -106,7 +113,7 @@ class _Home extends State<HomeScreen>{
                         Row(
                           children: [
                             Text(
-                              '${widget.nameCity}, ${widget.country}',
+                              '${widget.name}, ${widget.country}',
                               style: theme.textTheme.titleLarge,
                               textAlign: TextAlign.left,
                             ),
