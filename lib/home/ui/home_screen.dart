@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:clima/home/models/hourly_weather_model.dart';
 import 'package:clima/home/repositories/current_weather_api.dart';
@@ -113,10 +114,16 @@ class _Home extends State<HomeScreen>{
                         //Este elemento é a cidade que o usuário selecionou
                         Row(
                           children: [
-                            Text(
-                              '${widget.name}, ${widget.country}',
-                              style: theme.textTheme.titleLarge,
-                              textAlign: TextAlign.left,
+                            Expanded(
+                              child: AutoSizeText(
+                                '${widget.name}, ${widget.country}',
+                                style: theme.textTheme.titleLarge,
+                                textAlign: TextAlign.left,
+                                maxLines: 2,
+                                maxFontSize: 36,
+                                minFontSize: 15,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
