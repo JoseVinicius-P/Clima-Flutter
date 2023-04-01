@@ -69,12 +69,13 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
                             scrollDirection: Axis.vertical,
                             itemCount: 7,
                             itemBuilder: (context, index){
+                              int i = index + 1;
                               return Column(
                                 children: [
                                   DayOfWeekWidget(
-                                      dayWeek: InterpreterDate.getNameOfWeekDay(snapshot.data!.time[index].weekday),
-                                      temperature: '${snapshot.data!.temperature_2m_min[index].round()}º/${snapshot.data!.temperature_2m_max[index].round()}º',
-                                      img_name: InterpreterWeatherCode.getImgNameWeather(snapshot.data!.weathercode[index])),
+                                      dayWeek: InterpreterDate.getNameOfWeekDay(snapshot.data!.time[i].weekday),
+                                      temperature: '${snapshot.data!.temperature_2m_min[i].round()}º/${snapshot.data!.temperature_2m_max[i].round()}º',
+                                      img_name: InterpreterWeatherCode.getImgNameWeather(snapshot.data!.weathercode[i])),
                                   SizedBox(height: 10),
                                 ],
                               );
