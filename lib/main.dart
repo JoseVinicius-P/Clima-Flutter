@@ -61,8 +61,8 @@ class MyApp extends StatelessWidget {
               timezone: args['timezone']
           );
         },
-        'searchCityScreen': (context) => const SearchCityScreen(),
-        'nextSevenDaysScreen' : (context) => const NextSevenDaysScreen(),
+        '/searchCityScreen': (context) => const SearchCityScreen(),
+        '/nextSevenDaysScreen' : (context) => const NextSevenDaysScreen(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.textColorPrimary),
