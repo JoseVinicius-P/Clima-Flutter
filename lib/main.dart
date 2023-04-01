@@ -1,15 +1,48 @@
 import 'package:clima/home/ui/home_screen.dart';
+import 'package:clima/search_city/models/city_model.dart';
 import 'package:clima/search_city/ui/search_city_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'values/MyColors.dart';
 import 'values/MyStrings.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  // Inicializa o SharedPreferences
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefsCity = await SharedPreferences.getInstance();
+  runApp(MyApp(prefsCity: prefsCity));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final SharedPreferences prefsCity;
+  const MyApp({
+    super.key,
+    required this.prefsCity,
+  });
+
+
+  bool isCitySaved() {
+    if(prefsCity.containsKey('name')
+        && prefsCity.containsKey('latitude')
+        && prefsCity.containsKey('longitude')
+        && prefsCity.containsKey('timezone')
+        && prefsCity.containsKey('country')
+    ) {
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+  CityModel getCity(){
+      CityModel city = CityModel(
+          name: prefsCity.getString('name')!,
+          latitude: prefsCity.getDouble('latitude')!,
+          longitude: prefsCity.getDouble('longitude')!,
+          timezone: prefsCity.getString('timezone')!,
+          country: prefsCity.getString('country')!);
+      return city;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +62,13 @@ class MyApp extends StatelessWidget {
           titleSmall: TextStyle(fontSize: 18.0, color: MyColors.textColorPrimary, fontWeight: FontWeight.normal)
         ),
       ),
-      home: const SearchCityScreen(),
+      home: isCitySaved() ? HomeScreen(
+          nameCity: getCity().name,
+          country: getCity().country,
+          longitude: getCity().longitude,
+          latitude: getCity().latitude,
+          timezone: getCity().timezone)
+          : const SearchCityScreen(),
     );
   }
 }
