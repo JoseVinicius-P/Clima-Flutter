@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clima/home/blocs/interpreter_weather_code.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -36,13 +37,33 @@ class TimeConditionWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 //Exibindo informações do tempo em determinada hora
-                Text(time.day == DateTime.now().day && time.hour == DateTime.now().hour ? 'Agora' : DateFormat.Hm().format(time)),
+                Row(
+                  children: [
+                    Expanded(
+                      child: AutoSizeText(
+                        time.day == DateTime.now().day && time.hour == DateTime.now().hour ? 'Agora' : DateFormat.Hm().format(time),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                      )
+                    )
+                  ],
+                ),
                 Image(
                   image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(weathercode)}'),
                   width: 40,
                   fit: BoxFit.cover,
                 ),
-                Text('${temperature.round()}º')
+                Row(
+                  children: [
+                    Expanded(
+                        child: AutoSizeText(
+                          '${temperature.round()}º',
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        )
+                    )
+                  ],
+                ),
               ],
             ),
           ),
