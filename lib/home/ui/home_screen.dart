@@ -79,7 +79,13 @@ class _Home extends State<HomeScreen>{
   }
 
   void toNextSevenDaysScreen(){
-    Navigator.pushNamed(context, '/nextSevenDaysScreen');
+    Navigator.pushNamed(context,
+        '/nextSevenDaysScreen',
+        arguments: {
+          'latitude': widget.latitude,
+          'longitude': widget.longitude,
+          'timezone': widget.timezone,
+        });
   }
 
   @override

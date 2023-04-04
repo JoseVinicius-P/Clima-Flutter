@@ -12,7 +12,15 @@ import 'package:flutter/material.dart';
 
 //Classe que é a tela NextSevenDaysScreen, ou Teka dos próximos 7 dias
 class NextSevenDaysScreen extends StatefulWidget{
-  const NextSevenDaysScreen({super.key});
+  final double latitude, longitude;
+  final String timezone;
+
+  const NextSevenDaysScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+    required this.timezone
+  });
 
   @override
   State<NextSevenDaysScreen> createState() => _NextSevenDays();
@@ -47,7 +55,7 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
   }
 
   void fetchDailyWeather(){
-    futureDailyWeatherModel = DailyWeatherApi().fetchDailyWeather(latitude: -14.125, longitude: -46.625, timezone: 'America/Sao_Paulo');
+    futureDailyWeatherModel = DailyWeatherApi().fetchDailyWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
   }
 
   @override

@@ -62,7 +62,14 @@ class MyApp extends StatelessWidget {
           );
         },
         '/searchCityScreen': (context) => const SearchCityScreen(),
-        '/nextSevenDaysScreen' : (context) => const NextSevenDaysScreen(),
+        '/nextSevenDaysScreen' : (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return NextSevenDaysScreen(
+              longitude: args['longitude'],
+              latitude: args['latitude'],
+              timezone: args['timezone']
+          );
+        },
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.textColorPrimary),
