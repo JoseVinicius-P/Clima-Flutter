@@ -47,8 +47,7 @@ dependencies:
   #Para persistencia de dados simples
   shared_preferences: ^2.0.20
   #Para monitorar estado da conexão
-  connectivity_plus: ^3.0.3
-
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:
