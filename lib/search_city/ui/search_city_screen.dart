@@ -1,6 +1,7 @@
 import 'package:clima/home/ui/home_screen.dart';
 import 'package:clima/search_city/repositories/search_city_api.dart';
 import 'package:clima/search_city/ui/widgets/search_textfield_widget.dart';
+import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/search_city/models/city_model.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
@@ -72,7 +73,7 @@ class _SearchCityScreenState extends State<SearchCityScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          BackgroundWidget(),
+          BackgroundWidget(isNight: InterpreterHour.isNight(DateTime.now().hour)),
           //SafeArea para impedir que conteudo fique em cima de elementos da tela como status bar
           SafeArea(
             //Conteudo da tela

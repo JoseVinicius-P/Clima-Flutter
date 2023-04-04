@@ -4,6 +4,7 @@ import 'package:clima/next_seven_days/models/daily_weather_model.dart';
 import 'package:clima/next_seven_days/repositories/daily_weather_api.dart';
 import 'package:clima/next_seven_days/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/next_seven_days/ui/widgets/day_of_week_widget.dart';
+import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
@@ -81,7 +82,7 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
       ),
       body: Stack(
         children: [
-          BackgroundWidget(),
+          BackgroundWidget(isNight: InterpreterHour.isNight(DateTime.now().hour)),
           Padding(
             //Definindo espaçamento entre bordas da tela e elementos
             padding: EdgeInsets.only(top: 30.0, right: 30.0, left: 30.0),

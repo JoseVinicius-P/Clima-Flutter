@@ -6,6 +6,7 @@ import 'package:clima/home/repositories/hourly_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/list_hourly_weather_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
+import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/home/blocs/current_date.dart';
@@ -131,7 +132,7 @@ class _Home extends State<HomeScreen>{
       body: Stack(
         //Para ocupar o máximo de espaço
         children: [
-          BackgroundWidget(),
+          BackgroundWidget(isNight: InterpreterHour.isNight(DateTime.now().hour)),
           //Esse SingleChildScrollView é usado para que em caso de telas
           //pesquenas ou em rotação orizontal o usuário consiga rola para ver o conteudo
           SingleChildScrollView(
