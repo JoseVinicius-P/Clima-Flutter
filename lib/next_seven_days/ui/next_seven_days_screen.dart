@@ -7,6 +7,7 @@ import 'package:clima/next_seven_days/ui/widgets/day_of_week_widget.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 //Classe que é a tela NextSevenDaysScreen, ou Teka dos próximos 7 dias
@@ -20,10 +21,32 @@ class NextSevenDaysScreen extends StatefulWidget{
 
 class _NextSevenDays extends State<NextSevenDaysScreen>{
   late Future<DailyWeatherModel> futureDailyWeatherModel;
+  dynamic conectivityListenner;
 
   @override
   void initState() {
     super.initState();
+    fetchDailyWeather();
+    initListennerConectivity();
+  }
+
+  @override
+  void dispose() {
+    conectivityListenner.cancel();
+    super.dispose();
+  }
+
+  void initListennerConectivity(){
+    conectivityListenner = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if(result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
+        setState(() {
+          fetchDailyWeather();
+        });
+      }
+    });
+  }
+
+  void fetchDailyWeather(){
     futureDailyWeatherModel = DailyWeatherApi().fetchDailyWeather(latitude: -14.125, longitude: -46.625, timezone: 'America/Sao_Paulo');
   }
 
