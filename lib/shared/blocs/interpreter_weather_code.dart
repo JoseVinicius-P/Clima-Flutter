@@ -57,30 +57,29 @@ class InterpreterWeatherCode{
         return 'overcast.png';
       case 51:
       case 53:
-      case 56:
-        return 'cludy.png';
       case 55:
+        return 'cludy.png';
+      case 56:
       case 57:
       case 61:
         return 'cludy.png';
-      case 63:
-        return 'rain.png';
-      case 65:
-      case 80:
-        return 'rain.png';
       case 71:
       case 73:
       case 75:
       case 77:
       case 85:
       case 86:
-        return 'overcast.png';
+        return 'snow.png';
+      case 63:
+      case 65:
+      case 80:
       case 81:
+        return 'rain.png';
       case 82:
       case 95:
       case 96:
       case 99:
-        return 'rain.png';
+        return 'thunderstorm.png';
       default:
         return 'sunny.png';
     }
