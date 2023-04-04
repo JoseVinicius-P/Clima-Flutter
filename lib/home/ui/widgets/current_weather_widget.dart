@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clima/home/blocs/interpreter_weather_code.dart';
+import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:flutter/material.dart';
 
