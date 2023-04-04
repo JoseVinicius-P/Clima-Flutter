@@ -105,68 +105,28 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
                             }
                         );
                       }else{
-                        return ContainerShimmerWidget(height: 60);
+                        return Column(
+                          children: [
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                            ContainerShimmerWidget(height: 80),
+                            SizedBox(height: 10),
+                          ],
+                        );
                       }
                     },
                   ),
-                  /*Container(
-                    //Criando container com dados de amanhã
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(20.0)
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Amanhã',
-                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0, fontWeight: FontWeight.bold),
-                              ),
-                              //Adiiconado spacer para ocupar o espaço total entre o primeiro elemento
-                              //e outros, permintindo que os proximo elementos fiquem alinhados a direita
-                              Spacer(),
-                              Text(
-                                '25º',
-                                style: theme.textTheme.labelMedium?.copyWith(fontSize: 15.0, fontWeight: FontWeight.bold),
-                              ),
-                              //Adiicionando espaçamento
-                              SizedBox(width: 5),
-                              //Definindo imagem relacionada ao tempo
-                              Image(
-                                image: AssetImage('assets/images/cludy.png'),
-                                width: 60,
-                                fit: BoxFit.cover,
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 30),
-                          Row(
-                            //Alinhando todos os filhos no centro
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ConditionWeatherWidget(img_name: 'umbrella.png', dado: '22mm'),
-                              SizedBox(width: 30),
-                              ConditionWeatherWidget(img_name: 'wind.png', dado: '15km/h'),
-                              SizedBox(width: 30),
-                              ConditionWeatherWidget(img_name: 'humidity.png', dado: '10%'),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/
                 ),
-                //Adiiconando dados dos outros dias da semanaSizedBox(height:30),
-                /*DayOfWeekWidget(dayWeek: 'Segunda', temperature: '25º', img_name: 'cludy.png'),
-                SizedBox(height:10),
-                DayOfWeekWidget(dayWeek: 'Terça', temperature: '22º', img_name: 'cludy.png'),
-                SizedBox(height:10),
-                DayOfWeekWidget(dayWeek: 'Quarta', temperature: '30º', img_name: 'cludy.png'),*/
               ],
             ),
           ),
