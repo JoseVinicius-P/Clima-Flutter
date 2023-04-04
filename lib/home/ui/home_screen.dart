@@ -6,13 +6,12 @@ import 'package:clima/home/repositories/hourly_weather_api.dart';
 import 'package:clima/home/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/home/ui/widgets/list_hourly_weather_widget.dart';
 import 'package:clima/home/ui/widgets/current_weather_widget.dart';
-import 'package:clima/search_city/ui/search_city_screen.dart';
-import 'package:clima/next_seven_days/ui/next_seven_days_screen.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
 import 'package:clima/home/blocs/current_date.dart';
 import 'package:clima/values/MyColors.dart';
 import 'package:clima/values/MyStrings.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 //Este tela é a principal do app, ele mostra os dados completos de tempo atual
@@ -37,14 +36,41 @@ class HomeScreen extends StatefulWidget{
 
 class _Home extends State<HomeScreen>{
 
-  late Future<CurrentWeatherModel> futureCurrentWeather;
-  late Future<HourlyWeatherModel> futureHourlyWeather;
+  late Future<CurrentWeatherModel>? futureCurrentWeather;
+  late Future<HourlyWeatherModel>? futureHourlyWeather;
   var hourlyWeatherIsToday = true;
+  dynamic conectivityListenner;
 
   @override
   void initState() {
     super.initState();
+    fetchCurrentWeather();
+    fetchHourlyWeather();
+    initListennerConectivity();
+  }
+
+  @override
+  void dispose() {
+    conectivityListenner.cancel();
+    super.dispose();
+  }
+
+  void initListennerConectivity(){
+    conectivityListenner = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if(result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
+        setState(() {
+          fetchCurrentWeather();
+          fetchHourlyWeather();
+        });
+      }
+    });
+  }
+
+  void fetchCurrentWeather(){
     futureCurrentWeather = CurrentWeatherApi().fetchCurrentWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
+  }
+
+  void fetchHourlyWeather(){
     futureHourlyWeather = HourlyWeatherApi().fetchHourlyWeather(latitude: widget.latitude, longitude: widget.longitude, timezone: widget.timezone);
   }
   
