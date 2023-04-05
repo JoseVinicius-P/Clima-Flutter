@@ -26,7 +26,7 @@ class DayOfWeekWidget extends StatelessWidget {
       //Definindo container e estilo como fundo branco
       //parcialmente transparente e borda arredondada
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
+          color: Colors.white.withOpacity(0.3),
           borderRadius: BorderRadius.all(
               Radius.circular(20.0)
           )
