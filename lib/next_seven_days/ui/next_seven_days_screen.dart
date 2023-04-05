@@ -2,7 +2,6 @@
 import 'package:clima/next_seven_days/blocs/interpreter_date.dart';
 import 'package:clima/next_seven_days/models/daily_weather_model.dart';
 import 'package:clima/next_seven_days/repositories/daily_weather_api.dart';
-import 'package:clima/next_seven_days/ui/widgets/condition_weather_widget.dart';
 import 'package:clima/next_seven_days/ui/widgets/day_of_week_widget.dart';
 import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
