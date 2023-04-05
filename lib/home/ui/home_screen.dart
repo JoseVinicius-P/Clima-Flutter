@@ -114,6 +114,9 @@ class _Home extends State<HomeScreen>{
       //Fazendo body ficar sob app bar
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: MyColors.textColorPrimary,
+        ),
         //forçando app bar ficar transparente o tempo todo
         forceMaterialTransparency: true,
         backgroundColor: Colors.transparent,

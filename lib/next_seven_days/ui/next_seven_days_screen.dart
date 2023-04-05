@@ -7,6 +7,7 @@ import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:clima/shared/ui/widgets/background_widget.dart';
 import 'package:clima/shared/ui/widgets/container_shimmer_widget.dart';
+import 'package:clima/values/MyColors.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,9 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
       extendBodyBehindAppBar: true,
       //definindo app bar
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: MyColors.textColorPrimary,
+        ),
         centerTitle: true,
         title: Text(
           'Próximos 7 dias',

@@ -14,15 +14,15 @@ class ContainerShimmerWidget extends StatelessWidget {
     return SizedBox(
       height: height,
       child: Shimmer.fromColors(
-        baseColor: Colors.transparent,
-        highlightColor: Colors.deepOrange.withOpacity(0.4),
+        baseColor: Colors.white.withOpacity(0.1),
+        highlightColor: Colors.white.withOpacity(0.4),
         enabled: true,
         child: Container(
           height: height,
           decoration: BoxDecoration(
-            color: Colors.deepOrange.withOpacity(0.4),
+            color: Colors.white.withOpacity(0.4),
             borderRadius:const BorderRadius.all(
-              Radius.circular(12.0),
+              Radius.circular(20.0),
             ),
           ),
         ),
