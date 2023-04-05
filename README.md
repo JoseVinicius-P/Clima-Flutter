@@ -12,4 +12,5 @@ Este é um app Flutter que consulta dados meteorológicos disponíveis através 
 </p>
 <p align="center">App em funcionamento</p>
 
-<a align="center" href="https://drive.google.com/file/d/1JqYv6E88BkkHupFWvS4ir_sI5YaZIniN/view?usp=sharing">Faça o download do app Android</a>
+<h2>Links úteis</h2>
+<a href="https://drive.google.com/file/d/1JqYv6E88BkkHupFWvS4ir_sI5YaZIniN/view?usp=sharing">• Faça o download do app Android</a>
