@@ -110,7 +110,11 @@ class _NextSevenDays extends State<NextSevenDaysScreen>{
                                   DayOfWeekWidget(
                                       dayWeek: InterpreterDate.getNameOfWeekDay(snapshot.data!.time[i].weekday),
                                       temperature: '${snapshot.data!.temperature_2m_min[i].round()}º/${snapshot.data!.temperature_2m_max[i].round()}º',
-                                      img_name: InterpreterWeatherCode.getImgNameWeather(snapshot.data!.weathercode[i])),
+                                      img_name: InterpreterWeatherCode.getImgNameWeather(
+                                          snapshot.data!.weathercode[i],
+                                          InterpreterHour.isNight(DateTime.now().hour)
+                                      )
+                                  ),
                                   SizedBox(height: 10),
                                 ],
                               );

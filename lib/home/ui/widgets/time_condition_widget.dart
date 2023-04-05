@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -49,7 +50,7 @@ class TimeConditionWidget extends StatelessWidget {
                   ],
                 ),
                 Image(
-                  image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(weathercode)}'),
+                  image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(weathercode, InterpreterHour.isNight(time.hour))}'),
                   width: 40,
                   fit: BoxFit.cover,
                 ),

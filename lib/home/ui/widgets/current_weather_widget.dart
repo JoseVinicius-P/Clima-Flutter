@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clima/shared/blocs/interpreter_hour.dart';
 import 'package:clima/shared/blocs/interpreter_weather_code.dart';
 import 'package:clima/home/models/current_weather_model.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class CurrentWeatherWidget extends StatelessWidget {
       children: [
         //Imagem que representa como está o tempo
         Image(
-          image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(currentWeather.weathercode)}'),
+          image: AssetImage('assets/images/${InterpreterWeatherCode.getImgNameWeather(currentWeather.weathercode, InterpreterHour.isNight(DateTime.now().hour))}'),
           width: 150,
           fit: BoxFit.cover,
           filterQuality: FilterQuality.high,

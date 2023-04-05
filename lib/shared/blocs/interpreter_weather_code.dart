@@ -43,13 +43,21 @@ class InterpreterWeatherCode{
     }
   }
 
-  static String getImgNameWeather(int weathercode){
+  static String getImgNameWeather(int weathercode, bool isNight){
     switch (weathercode){
       case 0:
       case 1:
-        return 'sunny.png';
+        if(isNight){
+          return 'clean_night.png';
+        }else{
+          return 'clean.png';
+        }
       case 2:
-        return 'partlycloudy.png';
+        if(isNight){
+          return 'partlycloudy_night.png';
+        }else{
+          return 'partlycloudy.png';
+        }
       case 3:
         return 'overcast.png';
       case 45:
@@ -58,11 +66,14 @@ class InterpreterWeatherCode{
       case 51:
       case 53:
       case 55:
-        return 'cludy.png';
       case 56:
       case 57:
       case 61:
-        return 'cludy.png';
+        if(isNight){
+          return 'cludy_night.png';
+        }else{
+          return 'cludy.png';
+        }
       case 71:
       case 73:
       case 75:
