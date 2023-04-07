@@ -1,4 +1,3 @@
-# clima
 
 <p align="center">
   <img width="600" src="media/capa.png">
